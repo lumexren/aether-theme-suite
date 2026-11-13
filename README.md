@@ -27,17 +27,50 @@
 
 ## Coverage
 
-| Component | Target | Included |
+### Desktop & Core
+
+| Target | Path | Description |
 | :--- | :--- | :--- |
-| **Palette** | All Ports | [`palette/`](palette/) — `palette.json`, `palette.css`, ANSI & semantic tokens |
-| **Desktop** | KDE Plasma 6 | Global Theme (`Look & Feel`), Color Scheme (`Aether.colors`), Desktop Theme, 4K Wallpaper |
-| **Widgets** | Kvantum Engine | `Aether` translucent SVG theme (`kvantum-dark`) |
-| **Windows** | Aurorae v2 | `Aether` minimalist borderless window decoration |
-| **Apps** | GTK 3 · GTK 4 · Libadwaita | `Aether-Dark` GTK theme + user CSS overrides |
-| **Editors** | VS Code · VSCodium · Zed · Neovim · Kate | `lumexren.aether-dark` `.vsix`, `zed/aether.json`, Neovim Lua + Lualine, KTextEditor `.theme` |
-| **Terminals** | Konsole · Ghostty · Kitty · Alacritty · WezTerm | Native color schemes for all 5 terminal emulators + Fish/Zsh/Bash FZF colors |
-| **CLI & TUI** | Btop · Bat · Starship · Delta · Fastfetch · Eza · Lazygit · Yazi · Tmux | Full CLI/TUI styling synced with `palette.json` (`Aether Dark.tmTheme`, `eza`, `yazi`, etc.) |
-| **Fonts** | Fontconfig | Subpixel RGB & crisp desktop/code font configuration |
+| **Palette** | [`palette/`](palette/) | Canonical `palette.json`, `palette.css` & semantic tokens |
+| **KDE Plasma 6** | [`plasma/`](plasma/) | Global Theme, Color Scheme, Desktop Theme & 4K Wallpaper |
+| **Kvantum** | [`plasma/kvantum/`](plasma/kvantum/) | Translucent SVG widget style (`kvantum-dark`) |
+| **Aurorae v2** | [`plasma/aurorae/`](plasma/aurorae/) | Minimalist borderless window decoration |
+| **GTK 3 / 4 & Libadwaita** | [`gtk/`](gtk/) | `Aether-Dark` theme & user CSS overrides |
+| **Fontconfig** | [`fontconfig/`](fontconfig/) | Subpixel RGB & slight hinting configuration |
+
+### Editors
+
+| Target | Path | Description |
+| :--- | :--- | :--- |
+| **VS Code / VSCodium / Cursor** | [`vscode/`](vscode/) | `lumexren.aether-dark` extension (`.vsix` + preset settings) |
+| **Zed** | [`zed/`](zed/) | `Aether Dark` editor & terminal theme |
+| **Neovim** | [`neovim/`](neovim/) | Lua colorscheme (Treesitter, LSP, Telescope) & Lualine theme |
+| **Kate / KWrite** | [`kate/`](kate/) | `Aether Dark` KSyntaxHighlighting `.theme` |
+
+### Terminals & Shell
+
+| Target | Path | Description |
+| :--- | :--- | :--- |
+| **Konsole** | [`konsole/`](konsole/) | `Aether.colorscheme` + profile setup |
+| **Ghostty** | [`terminals/ghostty/`](terminals/ghostty/) | Native `aether-dark` palette theme |
+| **Kitty** | [`terminals/kitty/`](terminals/kitty/) | `aether-dark.conf` colors & tab bar styling |
+| **Alacritty** | [`terminals/alacritty/`](terminals/alacritty/) | `aether-dark.toml` color scheme |
+| **WezTerm** | [`terminals/wezterm/`](terminals/wezterm/) | `aether-dark.toml` scheme & tab bar |
+| **Fish / Zsh / Bash** | [`install.sh`](install.sh) | `FZF_DEFAULT_OPTS` Aether color configuration |
+
+### CLI & TUI
+
+| Target | Path | Description |
+| :--- | :--- | :--- |
+| **Starship** | [`starship/`](starship/) | Minimalist prompt with Aether accent tokens |
+| **Btop** | [`btop/`](btop/) | System monitor `aether.theme` |
+| **Bat** | [`bat/`](bat/) | Custom `Aether Dark.tmTheme` & pager config |
+| **Git Delta** | [`install.sh`](install.sh) | Diff styling paired with `Aether Dark` syntax theme |
+| **Fastfetch** | [`cli/fastfetch/`](cli/fastfetch/) | `aether.jsonc` system info layout & colors |
+| **Eza** | [`cli/eza/`](cli/eza/) | `theme.yml` file, permission, size & git colors |
+| **Lazygit** | [`cli/lazygit/`](cli/lazygit/) | `aether-dark.yml` UI & diff theme |
+| **Yazi** | [`cli/yazi/`](cli/yazi/) | `theme.toml` file manager & MIME rules |
+| **Tmux** | [`cli/tmux/`](cli/tmux/) | `aether.conf` status bar, panes & copy mode |
 
 ---
 
