@@ -12,6 +12,10 @@
 
 [Palette](palette/) · [Components](#coverage) · [Installation](#installation) · [License](LICENSE)
 
+<br/><br/>
+
+<img src="plasma/look-and-feel/Aether/contents/previews/fullscreenpreview.jpg" alt="Aether Theme Suite Preview" width="820" />
+
 </div>
 
 ---
