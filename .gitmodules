@@ -1,0 +1,3 @@
+[submodule "palette"]
+	path = palette
+	url = https://github.com/aether-theme-suite/palette.git

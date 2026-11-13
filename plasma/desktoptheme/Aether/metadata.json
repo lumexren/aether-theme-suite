@@ -1,0 +1,18 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "lumexren@gmail.com",
+                "Name": "lumexren"
+            }
+        ],
+        "Category": "Plasma 6 Desktop Themes",
+        "Description": "Aether Dark for Plasma 6",
+        "EnabledByDefault": true,
+        "Id": "Aether",
+        "License": "LGPL",
+        "Name": "Aether Dark",
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "5.0"
+}

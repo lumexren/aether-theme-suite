@@ -1,0 +1,12 @@
+{
+  "workbench.colorTheme": "Aether Dark",
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', 'Google Sans Code', monospace",
+  "editor.fontLigatures": "'calt', 'zero', 'ss02'",
+  "editor.fontSize": 14,
+  "editor.fontWeight": "400",
+  "editor.lineHeight": 23,
+  "editor.letterSpacing": 0.15,
+  "terminal.integrated.fontFamily": "'JetBrainsMono Nerd Font Mono'",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.lineHeight": 1.2
+}

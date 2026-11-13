@@ -1,0 +1,14 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "lumexren@gmail.com",
+                "Name": "lumexren"
+            }
+        ],
+        "Id": "Aether",
+        "License": "CC-BY-SA-4.0",
+        "Version": "1.0",
+        "Name": "Aether"
+    }
+}

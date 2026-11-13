@@ -1,0 +1,244 @@
+/* ==========================================================================
+   Aether Dark Theme for GTK 3, GTK 4 and Libadwaita
+   Deep Obsidian Dark (#111216) with Electric Royal Blue (#3c78ff) & Cyan (#10a6d4)
+   ========================================================================== */
+
+@import 'colors.css';
+
+/* --- Libadwaita & Modern GTK 4 Color Definitions --- */
+@define-color accent_color #3c78ff;
+@define-color accent_bg_color #3c78ff;
+@define-color accent_fg_color #ffffff;
+
+@define-color window_bg_color #111216;
+@define-color window_fg_color #f4f4f4;
+
+@define-color view_bg_color #111216;
+@define-color view_fg_color #f4f4f4;
+
+@define-color headerbar_bg_color #16181d;
+@define-color headerbar_fg_color #f4f4f4;
+@define-color headerbar_border_color #1f2228;
+@define-color headerbar_backdrop_color #111216;
+
+@define-color card_bg_color #16181d;
+@define-color card_fg_color #f4f4f4;
+@define-color card_border_color #1f2228;
+
+@define-color popover_bg_color #16181d;
+@define-color popover_fg_color #f4f4f4;
+
+@define-color dialog_bg_color #16181d;
+@define-color dialog_fg_color #f4f4f4;
+
+@define-color sidebar_bg_color #16181d;
+@define-color sidebar_fg_color #f4f4f4;
+@define-color secondary_sidebar_bg_color #111216;
+@define-color secondary_sidebar_fg_color #f4f4f4;
+
+@define-color destructive_color #f13460;
+@define-color destructive_bg_color #f13460;
+@define-color destructive_fg_color #ffffff;
+
+@define-color success_color #269e9c;
+@define-color success_bg_color #269e9c;
+@define-color success_fg_color #ffffff;
+
+@define-color dark_1 #0e0f13;
+@define-color dark_2 #111216;
+@define-color dark_3 #16181d;
+@define-color dark_4 #1f2228;
+@define-color dark_5 #262a33;
+
+/* --- Standard GTK 3 & GTK 4 Variables --- */
+@define-color theme_base_color #111216;
+@define-color theme_text_color #f4f4f4;
+@define-color theme_bg_color #111216;
+@define-color theme_fg_color #f4f4f4;
+
+@define-color theme_selected_bg_color #3c78ff;
+@define-color theme_selected_fg_color #ffffff;
+
+@define-color theme_button_background_normal #16181d;
+@define-color theme_button_decoration_hover #10a6d4;
+@define-color theme_button_decoration_focus #3c78ff;
+
+@define-color borders #1f2228;
+@define-color unfocused_borders #171920;
+
+/* --- Core Widget Styling --- */
+window, dialog, .background {
+    background-color: @window_bg_color;
+    color: @window_fg_color;
+}
+
+headerbar, .titlebar {
+    background-color: @headerbar_bg_color;
+    color: @headerbar_fg_color;
+    border-bottom: 1px solid @headerbar_border_color;
+}
+
+headerbar button.titlebutton.close:hover {
+    background-color: #f13460;
+    color: #ffffff;
+}
+
+/* Sidebars and Panes */
+.sidebar, .source-view, treeview, list {
+    background-color: @sidebar_bg_color;
+    color: @sidebar_fg_color;
+}
+
+/* Selections */
+:selected, selection {
+    background-color: @accent_bg_color;
+    color: @accent_fg_color;
+}
+
+/* Buttons */
+button {
+    background-color: #16181d;
+    color: #f4f4f4;
+    border: 1px solid #1f2228;
+    border-radius: 6px;
+    transition: all 150ms ease;
+}
+
+button:hover {
+    background-color: #1f2228;
+    border-color: #3c78ff;
+}
+
+button:active, button:checked {
+    background-color: #3c78ff;
+    color: #ffffff;
+    border-color: #3c78ff;
+}
+
+button.flat {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.flat:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: transparent;
+}
+
+button.suggested-action {
+    background-color: #3c78ff;
+    color: #ffffff;
+    border-color: #3c78ff;
+}
+
+button.suggested-action:hover {
+    background-color: #2d65e6;
+}
+
+button.destructive-action {
+    background-color: #f13460;
+    color: #ffffff;
+    border-color: #f13460;
+}
+
+button.destructive-action:hover {
+    background-color: #d8254f;
+}
+
+.linked > button {
+    border-radius: 0;
+}
+
+.linked > button:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.linked > button:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.linked > button:only-child {
+    border-radius: 6px;
+}
+
+/* Switches, Checks, Radios, Scales & Progressbars */
+switch {
+    background-color: #1f2228;
+    border: 1px solid #262a33;
+}
+
+switch:checked {
+    background-color: #3c78ff;
+    border-color: #3c78ff;
+}
+
+switch slider {
+    background-color: #f4f4f4;
+}
+
+check:checked, radio:checked {
+    background-color: #3c78ff;
+    border-color: #3c78ff;
+    color: #ffffff;
+}
+
+scale highlight, progressbar progress {
+    background-color: #3c78ff;
+}
+
+notebook > header tabs > tab:checked {
+    border-bottom: 2px solid #3c78ff;
+    color: #f4f4f4;
+}
+
+/* Text Inputs */
+entry {
+    background-color: #16181d;
+    color: #f4f4f4;
+    border: 1px solid #1f2228;
+    border-radius: 6px;
+}
+
+entry:focus {
+    border-color: #3c78ff;
+    box-shadow: 0 0 0 1px #3c78ff;
+}
+
+/* Menus and Popovers */
+menu, popover, popover.background {
+    background-color: #16181d;
+    color: #f4f4f4;
+    border: 1px solid #1f2228;
+    border-radius: 8px;
+}
+
+menu menuitem:hover, popover list row:hover {
+    background-color: #3c78ff;
+    color: #ffffff;
+}
+
+/* Tooltips */
+tooltip, tooltip.background {
+    background-color: #1a1d24;
+    color: #ffffff;
+    border: 1px solid #262a33;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Scrollbars */
+scrollbar slider {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+scrollbar slider:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+scrollbar slider:active {
+    background-color: #3c78ff;
+}
+

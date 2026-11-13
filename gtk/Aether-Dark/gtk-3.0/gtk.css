@@ -1,0 +1,207 @@
+/* ==========================================================================
+   Aether Dark GTK 3 Theme
+   Deep Obsidian Dark (#111216) with Electric Royal Blue (#3c78ff) & Cyan (#10a6d4)
+   ========================================================================== */
+
+@import url("/usr/share/themes/Breeze-Dark/gtk-3.0/gtk.css");
+
+/* --- Breeze Token Overrides for Aether --- */
+@define-color theme_fg_color_breeze #f4f4f4;
+@define-color theme_text_color_breeze #f4f4f4;
+@define-color theme_bg_color_breeze #111216;
+@define-color theme_base_color_breeze #111216;
+@define-color content_view_bg_breeze #111216;
+@define-color theme_view_hover_decoration_color_breeze #10a6d4;
+@define-color theme_hovering_selected_bg_color_breeze #10a6d4;
+@define-color theme_selected_bg_color_breeze #3c78ff;
+@define-color theme_selected_fg_color_breeze #ffffff;
+@define-color theme_button_background_normal_breeze #16181d;
+@define-color theme_button_background_insensitive_breeze #111216;
+@define-color theme_button_decoration_hover_breeze #10a6d4;
+@define-color theme_button_decoration_focus_breeze #3c78ff;
+@define-color theme_button_foreground_normal_breeze #f4f4f4;
+@define-color theme_header_background_breeze #16181d;
+@define-color theme_header_foreground_breeze #f4f4f4;
+@define-color theme_header_background_light_breeze #16181d;
+@define-color theme_header_foreground_insensitive_breeze #9199a8;
+@define-color theme_titlebar_background_breeze #111216;
+@define-color theme_titlebar_foreground_breeze #edf0f2;
+@define-color theme_titlebar_background_backdrop_breeze #111216;
+@define-color theme_titlebar_foreground_backdrop_breeze #b5b6b6;
+@define-color borders_breeze #1f2228;
+@define-color unfocused_borders_breeze #171920;
+@define-color tooltip_background_breeze #1a1d24;
+@define-color tooltip_text_breeze #ffffff;
+@define-color tooltip_border_breeze #262a33;
+@define-color link_color_breeze #3c78ff;
+@define-color link_visited_color_breeze #7f8c8d;
+@define-color error_color_breeze #f13460;
+@define-color success_color_breeze #269e9c;
+@define-color warning_color_breeze #f67400;
+
+/* --- Standard GTK 3 Variables --- */
+@define-color theme_base_color #111216;
+@define-color theme_text_color #f4f4f4;
+@define-color theme_bg_color #111216;
+@define-color theme_fg_color #f4f4f4;
+@define-color theme_selected_bg_color #3c78ff;
+@define-color theme_selected_fg_color #ffffff;
+@define-color borders #1f2228;
+@define-color unfocused_borders #171920;
+
+window, dialog, .background {
+    background-color: #111216;
+    color: #f4f4f4;
+}
+
+headerbar, .titlebar {
+    background-color: #16181d;
+    color: #f4f4f4;
+    border-bottom: 1px solid #1f2228;
+}
+
+headerbar button.titlebutton.close:hover {
+    background-color: #f13460;
+    color: #ffffff;
+}
+
+.sidebar, .source-view, treeview, list {
+    background-color: #16181d;
+    color: #f4f4f4;
+}
+
+:selected, selection {
+    background-color: #3c78ff;
+    color: #ffffff;
+}
+
+button {
+    background-color: #16181d;
+    color: #f4f4f4;
+    border: 1px solid #1f2228;
+    border-radius: 6px;
+}
+
+button:hover {
+    background-color: #1f2228;
+    border-color: #3c78ff;
+}
+
+button:active, button:checked {
+    background-color: #3c78ff;
+    color: #ffffff;
+    border-color: #3c78ff;
+}
+
+button.flat {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+button.flat:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-color: transparent;
+}
+
+button.suggested-action {
+    background-color: #3c78ff;
+    color: #ffffff;
+    border-color: #3c78ff;
+}
+
+button.destructive-action {
+    background-color: #f13460;
+    color: #ffffff;
+    border-color: #f13460;
+}
+
+.linked > button {
+    border-radius: 0;
+}
+
+.linked > button:first-child {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+}
+
+.linked > button:last-child {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.linked > button:only-child {
+    border-radius: 6px;
+}
+
+switch {
+    background-color: #1f2228;
+    border: 1px solid #262a33;
+}
+
+switch:checked {
+    background-color: #3c78ff;
+    border-color: #3c78ff;
+}
+
+switch slider {
+    background-color: #f4f4f4;
+}
+
+check:checked, radio:checked {
+    background-color: #3c78ff;
+    border-color: #3c78ff;
+    color: #ffffff;
+}
+
+scale highlight, progressbar progress {
+    background-color: #3c78ff;
+}
+
+notebook > header tabs > tab:checked {
+    border-bottom: 2px solid #3c78ff;
+    color: #f4f4f4;
+}
+
+entry {
+    background-color: #16181d;
+    color: #f4f4f4;
+    border: 1px solid #1f2228;
+    border-radius: 6px;
+}
+
+entry:focus {
+    border-color: #3c78ff;
+    box-shadow: 0 0 0 1px #3c78ff;
+}
+
+menu, popover, popover.background {
+    background-color: #16181d;
+    color: #f4f4f4;
+    border: 1px solid #1f2228;
+    border-radius: 8px;
+}
+
+menu menuitem:hover, popover list row:hover {
+    background-color: #3c78ff;
+    color: #ffffff;
+}
+
+tooltip, tooltip.background {
+    background-color: #1a1d24;
+    color: #ffffff;
+    border: 1px solid #262a33;
+    border-radius: 6px;
+}
+
+scrollbar slider {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+}
+
+scrollbar slider:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+scrollbar slider:active {
+    background-color: #3c78ff;
+}

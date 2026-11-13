@@ -1,0 +1,80 @@
+# Theme: Aether Dark
+# Deep Obsidian (#111216) with Electric Royal Blue (#3c78ff) & Cyan (#10a6d4)
+
+# Main bg
+theme[main_bg]="#111216"
+
+# Main text color
+theme[main_fg]="#f4f4f4"
+
+# Title color for boxes
+theme[title]="#3c78ff"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="#10a6d4"
+
+# Background color of selected item in processes box
+theme[selected_bg]="#16181d"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="#ffffff"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="#5c6370"
+
+# Misc colors for processes box
+theme[proc_misc]="#10a6d4"
+
+# Box outline colors
+theme[cpu_box]="#1f2228"
+theme[mem_box]="#1f2228"
+theme[net_box]="#1f2228"
+theme[proc_box]="#1f2228"
+
+# Box divider line
+theme[div_line]="#1f2228"
+
+# Temperature graph colors
+theme[temp_start]="#269e9c"
+theme[temp_mid]="#3c78ff"
+theme[temp_end]="#f13460"
+
+# CPU graph colors
+theme[cpu_start]="#3c78ff"
+theme[cpu_mid]="#10a6d4"
+theme[cpu_end]="#f13460"
+
+# Mem/Disk free meter
+theme[free_start]="#269e9c"
+theme[free_mid]="#3c78ff"
+theme[free_end]="#f13460"
+
+# Mem/Disk cached meter
+theme[cached_start]="#10a6d4"
+theme[cached_mid]="#3c78ff"
+theme[cached_end]="#f13460"
+
+# Mem/Disk available meter
+theme[available_start]="#269e9c"
+theme[available_mid]="#3c78ff"
+theme[available_end]="#f13460"
+
+# Mem/Disk used meter
+theme[used_start]="#3c78ff"
+theme[used_mid]="#10a6d4"
+theme[used_end]="#f13460"
+
+# Download graph colors
+theme[download_start]="#10a6d4"
+theme[download_mid]="#3c78ff"
+theme[download_end]="#f13460"
+
+# Upload graph colors
+theme[upload_start]="#3c78ff"
+theme[upload_mid]="#10a6d4"
+theme[upload_end]="#f13460"
+
+# Process box gradient colors
+theme[process_start]="#3c78ff"
+theme[process_mid]="#10a6d4"
+theme[process_end]="#f13460"

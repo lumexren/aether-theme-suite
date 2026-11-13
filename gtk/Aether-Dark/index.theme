@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=X-GNOME-Metatheme
+Name=Aether-Dark
+Comment=Aether Dark GTK Theme
+Encoding=UTF-8
+
+[X-GNOME-Metatheme]
+GtkTheme=Aether-Dark
+IconTheme=Papirus-Dark
+CursorTheme=Bibata-Modern-Ice
+ButtonLayout=icon:minimize,maximize,close

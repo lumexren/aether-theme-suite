@@ -1,0 +1,31 @@
+{
+  "name": "aether-dark",
+  "displayName": "Aether Dark",
+  "description": "Aether Dark — A unified deep obsidian theme with electric royal blue and cyan accents.",
+  "version": "1.0.0",
+  "publisher": "lumexren",
+  "license": "MIT",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "aether",
+    "dark",
+    "obsidian",
+    "theme",
+    "color-theme"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Aether Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/aether-dark-color-theme.json"
+      }
+    ]
+  }
+}
