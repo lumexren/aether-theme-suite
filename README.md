@@ -8,10 +8,6 @@
 
 <br/>
 
-`#111216` &nbsp;✦&nbsp; `#16181d` &nbsp;✦&nbsp; `#3c78ff` &nbsp;✦&nbsp; `#10a6d4` &nbsp;✦&nbsp; `#269e9c` &nbsp;✦&nbsp; `#f13460`
-
-<br/>
-
 [Palette](palette/) · [Components](#coverage) · [Installation](#installation) · [License](LICENSE)
 
 </div>
