@@ -73,31 +73,6 @@ Useful installer flags:
 
 ---
 
-## Repository Structure
-
-```text
-aether-theme-suite/
-├── palette/         # Canonical color & typography tokens (palette.json, palette.css)
-├── plasma/          # KDE Plasma 6 (look-and-feel, desktoptheme, color-schemes, aurorae, kvantum, wallpaper)
-├── gtk/             # Aether-Dark GTK 3/4 theme & Libadwaita overrides
-├── vscode/          # Aether Dark VS Code extension source, .vsix package & preset
-├── zed/             # Zed editor theme (aether.json)
-├── neovim/          # Neovim Lua colorscheme & Lualine theme
-├── kate/            # Kate / KWrite / KTextEditor syntax-highlighting theme
-├── konsole/         # Konsole color scheme
-├── terminals/       # Ghostty, Kitty, Alacritty & WezTerm themes
-├── cli/             # Fastfetch, Eza, Lazygit, Yazi & Tmux themes
-├── starship/        # Starship prompt config
-├── btop/            # Btop system monitor theme
-├── bat/             # Bat config & Aether Dark.tmTheme
-├── fontconfig/      # Font rendering configs
-├── scripts/         # Palette sync/validation & VSIX packaging scripts
-├── Makefile         # `make check`, `make sync`, `make package-vscode`
-└── install.sh       # Modular installer with backups & --uninstall
-```
-
----
-
 ## License
 
 Released under the [MIT License](LICENSE).
