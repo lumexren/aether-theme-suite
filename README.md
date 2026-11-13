@@ -10,7 +10,7 @@
 
 <br/>
 
-[Palette](https://github.com/aether-theme-suite/palette) · [Components](#coverage) · [Installation](#installation) · [License](LICENSE)
+[Palette](palette/) · [Components](#coverage) · [Installation](#installation) · [License](LICENSE)
 
 </div>
 
@@ -21,7 +21,7 @@
 **Aether** synchronizes your Linux desktop, editors, terminals, and CLI tools into one cohesive **Deep Obsidian** aesthetic with translucent glass surfaces, crisp typography, and high-contrast electric accents.
 
 * **Palette:** Deep Obsidian (`#111216`) · Surface (`#16181d`) · Royal Blue (`#3c78ff`) · Electric Cyan (`#10a6d4`) · Teal (`#269e9c`) · Crimson (`#f13460`) · Electric Violet (`#a673f5`)
-* **Canonical Source:** [`aether-theme-suite/palette`](https://github.com/aether-theme-suite/palette)
+* **Canonical Source:** [`palette/palette.json`](palette/palette.json)
 * **Typography:** `Google Sans` (Desktop / UI) · `JetBrainsMono Nerd Font` (Code / Terminal)
 * **Font Rendering:** RGB Subpixel Antialiasing · Slight Hinting
 
@@ -31,30 +31,40 @@
 
 | Component | Target | Included |
 | :--- | :--- | :--- |
-| **Palette** | All Ports | [`palette/`](https://github.com/aether-theme-suite/palette) — `palette.json`, `palette.css`, ANSI & semantic tokens |
+| **Palette** | All Ports | [`palette/`](palette/) — `palette.json`, `palette.css`, ANSI & semantic tokens |
 | **Desktop** | KDE Plasma 6 | Global Theme (`Look & Feel`), Color Scheme (`Aether.colors`), Desktop Theme, 4K Wallpaper |
 | **Widgets** | Kvantum Engine | `Aether` translucent SVG theme (`kvantum-dark`) |
 | **Windows** | Aurorae v2 | `Aether` minimalist borderless window decoration |
 | **Apps** | GTK 3 · GTK 4 · Libadwaita | `Aether-Dark` GTK theme + user CSS overrides |
 | **Editors** | VS Code · VSCodium · Zed | `lumexren.aether-dark` extension (`.vsix` + source) & `zed/aether.json` |
-| **Terminals** | Konsole · Fish | `Aether.colorscheme` + FZF Aether colors |
-| **CLI & TUI** | Btop · Bat · Starship · Delta | System monitor theme, prompt, syntax pager & Git diff styling |
+| **Terminals** | Konsole · Fish · Zsh · Bash | `Aether.colorscheme` + FZF Aether colors |
+| **CLI & TUI** | Btop · Bat · Starship · Delta | System monitor theme, prompt, `Aether Dark.tmTheme` & Git diff styling |
 | **Fonts** | Fontconfig | Subpixel RGB & crisp desktop/code font configuration |
 
 ---
 
 ## Installation
 
-Clone the repository including submodules and run the installer:
+Clone the repository and run the installer:
 
 ```bash
-git clone --recursive https://github.com/aether-theme-suite/aether-theme-suite.git
+git clone https://github.com/lumexren/aether-theme-suite.git
 cd aether-theme-suite
 ./install.sh
 ```
 
+Useful installer flags:
+
+```bash
+./install.sh --dry-run                   # Preview changes without touching files
+./install.sh --only plasma,konsole,bat   # Install selected components only
+./install.sh --skip plasma               # Skip specific components
+./install.sh --with-shell-aliases        # Also add `alias cat="bat --paging=never"`
+./install.sh --uninstall                 # Remove Aether files & restore backups
+```
+
 > [!NOTE]
-> `install.sh` applies Plasma 6, Kvantum, Aurorae, GTK 3/4, Konsole, VS Code/VSCodium/Antigravity IDE, Zed, Starship, Btop, Bat, Delta, and Fish FZF settings for the current user.
+> `install.sh` backs up overwritten configs under `~/.local/state/aether-theme-suite/backups/` and applies Plasma 6, Kvantum, Aurorae, GTK 3/4, Konsole, VS Code/VSCodium/Antigravity/Cursor, Zed, Starship, Btop, Bat (`Aether Dark.tmTheme`), Delta, and Fish/Zsh/Bash FZF settings for the current user.
 
 ### Recommended Dependencies
 
@@ -69,7 +79,7 @@ cd aether-theme-suite
 
 ```text
 aether-theme-suite/
-├── palette/         # Submodule -> aether-theme-suite/palette (tokens & CSS variables)
+├── palette/         # Canonical color & typography tokens (palette.json, palette.css)
 ├── plasma/          # KDE Plasma 6 (look-and-feel, desktoptheme, color-schemes, aurorae, kvantum, wallpaper)
 ├── gtk/             # Aether-Dark GTK 3/4 theme & Libadwaita overrides
 ├── vscode/          # Aether Dark VS Code extension source, .vsix package & preset
@@ -77,9 +87,11 @@ aether-theme-suite/
 ├── konsole/         # Konsole color scheme
 ├── starship/        # Starship prompt config
 ├── btop/            # Btop system monitor theme
-├── bat/             # Bat pager config
+├── bat/             # Bat config & Aether Dark.tmTheme
 ├── fontconfig/      # Font rendering configs
-└── install.sh       # Automated installer
+├── scripts/         # Palette sync/validation & VSIX packaging scripts
+├── Makefile         # `make check`, `make sync`, `make package-vscode`
+└── install.sh       # Modular installer with backups & --uninstall
 ```
 
 ---

@@ -1,4 +1,4 @@
 # Bat syntax highlighter configuration - Aether Dark
---theme="Coldark-Dark"
+--theme="Aether Dark"
 --italic-text=always
 --style="numbers,changes,header"

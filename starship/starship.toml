@@ -60,7 +60,7 @@ format = "via [$symbol$version]($style) "
 
 [nodejs]
 symbol = "󰎙 "
-style = "bold #27ae60"
+style = "bold #269e9c"
 format = "via [$symbol$version]($style) "
 
 [zig]

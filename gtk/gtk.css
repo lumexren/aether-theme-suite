@@ -3,8 +3,6 @@
    Deep Obsidian Dark (#111216) with Electric Royal Blue (#3c78ff) & Cyan (#10a6d4)
    ========================================================================== */
 
-@import 'colors.css';
-
 /* --- Libadwaita & Modern GTK 4 Color Definitions --- */
 @define-color accent_color #3c78ff;
 @define-color accent_bg_color #3c78ff;

@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check palette sync & schema validity
+        run: python3 scripts/sync-palette.py --check
+
+      - name: Shell syntax & ShellCheck
+        run: |
+          bash -n install.sh scripts/package-vscode.sh
+          shellcheck install.sh scripts/package-vscode.sh
+
+      - name: Test installer dry-run
+        run: |
+          ./install.sh --dry-run
+          ./install.sh --only bat,starship --dry-run

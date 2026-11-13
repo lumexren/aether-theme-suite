@@ -1,0 +1,47 @@
+/* Aether Dark — Canonical Color Tokens (lumexren/aether-theme-suite) */
+:root {
+  --aether-crust: #0c0d11;
+  --aether-mantle: #0e0f13;
+  --aether-base: #111216;
+  --aether-surface0: #16181d;
+  --aether-surface1: #171920;
+  --aether-surface2: #1a1d24;
+  --aether-overlay0: #1f2228;
+  --aether-overlay1: #262a33;
+  --aether-overlay2: #3b404a;
+  --aether-comment: #5c6370;
+  --aether-subtext0: #707888;
+  --aether-subtext1: #8e96a5;
+  --aether-subtext2: #9199a8;
+  --aether-text: #abb2bf;
+  --aether-text-bright: #f4f4f4;
+  --aether-white: #ffffff;
+  --aether-blue: #3c78ff;
+  --aether-blue-bright: #6296ff;
+  --aether-blue-dim: #3062d6;
+  --aether-blue-hover: #2d65e6;
+  --aether-cyan: #10a6d4;
+  --aether-cyan-bright: #38c6f0;
+  --aether-cyan-dim: #0e8ab0;
+  --aether-teal: #269e9c;
+  --aether-teal-bright: #38c4c0;
+  --aether-teal-dim: #208886;
+  --aether-red: #f13460;
+  --aether-red-bright: #ff557a;
+  --aether-red-dim: #da2f57;
+  --aether-red-hover: #d8254f;
+  --aether-yellow: #e5c07b;
+  --aether-yellow-bright: #f6d28a;
+  --aether-peach: #d19a66;
+  --aether-orange: #f67400;
+  --aether-purple: #a673f5;
+  --aether-purple-bright: #c094ff;
+  --aether-purple-dim: #8c5ed4;
+  --aether-diff-add-bg: #132033;
+  --aether-diff-warn-bg: #282214;
+  --aether-diff-delete-bg: #2a121a;
+  --aether-font-ui-font: 'Google Sans';
+  --aether-font-mono-font: 'JetBrainsMono Nerd Font';
+  --aether-font-mono-terminal-font: 'JetBrainsMono Nerd Font Mono';
+  --aether-font-fallback-mono-font: 'Google Sans Code';
+}

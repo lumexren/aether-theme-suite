@@ -6,7 +6,7 @@ widgetStyle=kvantum-dark
 
 [kdeglobals][General]
 ColorScheme=Aether
-accentColorFromWallpaper=true
+accentColorFromWallpaper=false
 
 [kdeglobals][Icons]
 Theme=Papirus-Dark

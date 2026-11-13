@@ -1,0 +1,738 @@
+{
+  "version": "1.0.0",
+  "name": "Aether",
+  "variant": "Dark",
+  "author": "lumexren",
+  "description": "Single source of truth for the Aether Dark obsidian & electric royal-blue/cyan palette.",
+  "colors": {
+    "crust": {
+      "hex": "#0c0d11",
+      "rgb": {
+        "r": 12,
+        "g": 13,
+        "b": 17
+      },
+      "rgbString": "12, 13, 17",
+      "hsl": {
+        "h": 228,
+        "s": 17,
+        "l": 6
+      },
+      "hslString": "hsl(228, 17%, 6%)",
+      "role": "Deepest obsidian background (terminal intense bg)"
+    },
+    "mantle": {
+      "hex": "#0e0f13",
+      "rgb": {
+        "r": 14,
+        "g": 15,
+        "b": 19
+      },
+      "rgbString": "14, 15, 19",
+      "hsl": {
+        "h": 228,
+        "s": 15,
+        "l": 6
+      },
+      "hslString": "hsl(228, 15%, 6%)",
+      "role": "Obsidian edge / status bar / shadow base"
+    },
+    "base": {
+      "hex": "#111216",
+      "rgb": {
+        "r": 17,
+        "g": 18,
+        "b": 22
+      },
+      "rgbString": "17, 18, 22",
+      "hsl": {
+        "h": 228,
+        "s": 13,
+        "l": 8
+      },
+      "hslString": "hsl(228, 13%, 8%)",
+      "role": "Primary Deep Obsidian background"
+    },
+    "surface0": {
+      "hex": "#16181d",
+      "rgb": {
+        "r": 22,
+        "g": 24,
+        "b": 29
+      },
+      "rgbString": "22, 24, 29",
+      "hsl": {
+        "h": 223,
+        "s": 14,
+        "l": 10
+      },
+      "hslString": "hsl(223, 14%, 10%)",
+      "role": "Primary elevated surface (panels, sidebars, tabs)"
+    },
+    "surface1": {
+      "hex": "#171920",
+      "rgb": {
+        "r": 23,
+        "g": 25,
+        "b": 32
+      },
+      "rgbString": "23, 25, 32",
+      "hsl": {
+        "h": 227,
+        "s": 16,
+        "l": 11
+      },
+      "hslString": "hsl(227, 16%, 11%)",
+      "role": "Active line / subtle variant surface"
+    },
+    "surface2": {
+      "hex": "#1a1d24",
+      "rgb": {
+        "r": 26,
+        "g": 29,
+        "b": 36
+      },
+      "rgbString": "26, 29, 36",
+      "hsl": {
+        "h": 222,
+        "s": 16,
+        "l": 12
+      },
+      "hslString": "hsl(222, 16%, 12%)",
+      "role": "Highlighted surface / tooltips / alternate buttons"
+    },
+    "overlay0": {
+      "hex": "#1f2228",
+      "rgb": {
+        "r": 31,
+        "g": 34,
+        "b": 40
+      },
+      "rgbString": "31, 34, 40",
+      "hsl": {
+        "h": 220,
+        "s": 13,
+        "l": 14
+      },
+      "hslString": "hsl(220, 13%, 14%)",
+      "role": "Default borders and dividers"
+    },
+    "overlay1": {
+      "hex": "#262a33",
+      "rgb": {
+        "r": 38,
+        "g": 42,
+        "b": 51
+      },
+      "rgbString": "38, 42, 51",
+      "hsl": {
+        "h": 222,
+        "s": 15,
+        "l": 17
+      },
+      "hslString": "hsl(222, 15%, 17%)",
+      "role": "Strong borders and hover surfaces"
+    },
+    "overlay2": {
+      "hex": "#3b404a",
+      "rgb": {
+        "r": 59,
+        "g": 64,
+        "b": 74
+      },
+      "rgbString": "59, 64, 74",
+      "hsl": {
+        "h": 220,
+        "s": 11,
+        "l": 26
+      },
+      "hslString": "hsl(220, 11%, 26%)",
+      "role": "ANSI black, indent guides, invisible glyphs"
+    },
+    "comment": {
+      "hex": "#5c6370",
+      "rgb": {
+        "r": 92,
+        "g": 99,
+        "b": 112
+      },
+      "rgbString": "92, 99, 112",
+      "hsl": {
+        "h": 219,
+        "s": 10,
+        "l": 40
+      },
+      "hslString": "hsl(219, 10%, 40%)",
+      "role": "Comments, disabled text, placeholders, line numbers"
+    },
+    "subtext0": {
+      "hex": "#707888",
+      "rgb": {
+        "r": 112,
+        "g": 120,
+        "b": 136
+      },
+      "rgbString": "112, 120, 136",
+      "hsl": {
+        "h": 220,
+        "s": 10,
+        "l": 49
+      },
+      "hslString": "hsl(220, 10%, 49%)",
+      "role": "Doc comments, ANSI bright black"
+    },
+    "subtext1": {
+      "hex": "#8e96a5",
+      "rgb": {
+        "r": 142,
+        "g": 150,
+        "b": 165
+      },
+      "rgbString": "142, 150, 165",
+      "hsl": {
+        "h": 219,
+        "s": 11,
+        "l": 60
+      },
+      "hslString": "hsl(219, 11%, 60%)",
+      "role": "Muted labels, punctuation, dim foreground"
+    },
+    "subtext2": {
+      "hex": "#9199a8",
+      "rgb": {
+        "r": 145,
+        "g": 153,
+        "b": 168
+      },
+      "rgbString": "145, 153, 168",
+      "hsl": {
+        "h": 219,
+        "s": 12,
+        "l": 61
+      },
+      "hslString": "hsl(219, 12%, 61%)",
+      "role": "Inactive UI foreground, ANSI dim white"
+    },
+    "text": {
+      "hex": "#abb2bf",
+      "rgb": {
+        "r": 171,
+        "g": 178,
+        "b": 191
+      },
+      "rgbString": "171, 178, 191",
+      "hsl": {
+        "h": 219,
+        "s": 14,
+        "l": 71
+      },
+      "hslString": "hsl(219, 14%, 71%)",
+      "role": "Primary editor text, ANSI white"
+    },
+    "textBright": {
+      "hex": "#f4f4f4",
+      "rgb": {
+        "r": 244,
+        "g": 244,
+        "b": 244
+      },
+      "rgbString": "244, 244, 244",
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 96
+      },
+      "hslString": "hsl(0, 0%, 96%)",
+      "role": "Primary desktop/terminal foreground, ANSI bright white"
+    },
+    "white": {
+      "hex": "#ffffff",
+      "rgb": {
+        "r": 255,
+        "g": 255,
+        "b": 255
+      },
+      "rgbString": "255, 255, 255",
+      "hsl": {
+        "h": 0,
+        "s": 0,
+        "l": 100
+      },
+      "hslString": "hsl(0, 0%, 100%)",
+      "role": "Pure white for selected/focused intense text"
+    },
+    "blue": {
+      "hex": "#3c78ff",
+      "rgb": {
+        "r": 60,
+        "g": 120,
+        "b": 255
+      },
+      "rgbString": "60, 120, 255",
+      "hsl": {
+        "h": 222,
+        "s": 100,
+        "l": 62
+      },
+      "hslString": "hsl(222, 100%, 62%)",
+      "role": "Royal Blue — primary accent, functions, active focus"
+    },
+    "blueBright": {
+      "hex": "#6296ff",
+      "rgb": {
+        "r": 98,
+        "g": 150,
+        "b": 255
+      },
+      "rgbString": "98, 150, 255",
+      "hsl": {
+        "h": 220,
+        "s": 100,
+        "l": 69
+      },
+      "hslString": "hsl(220, 100%, 69%)",
+      "role": "Bright Royal Blue — methods, ANSI bright blue"
+    },
+    "blueDim": {
+      "hex": "#3062d6",
+      "rgb": {
+        "r": 48,
+        "g": 98,
+        "b": 214
+      },
+      "rgbString": "48, 98, 214",
+      "hsl": {
+        "h": 222,
+        "s": 67,
+        "l": 51
+      },
+      "hslString": "hsl(222, 67%, 51%)",
+      "role": "Dim Royal Blue — ANSI dim blue"
+    },
+    "blueHover": {
+      "hex": "#2d65e6",
+      "rgb": {
+        "r": 45,
+        "g": 101,
+        "b": 230
+      },
+      "rgbString": "45, 101, 230",
+      "hsl": {
+        "h": 222,
+        "s": 79,
+        "l": 54
+      },
+      "hslString": "hsl(222, 79%, 54%)",
+      "role": "Pressed / deep royal blue accent"
+    },
+    "cyan": {
+      "hex": "#10a6d4",
+      "rgb": {
+        "r": 16,
+        "g": 166,
+        "b": 212
+      },
+      "rgbString": "16, 166, 212",
+      "hsl": {
+        "h": 194,
+        "s": 86,
+        "l": 45
+      },
+      "hslString": "hsl(194, 86%, 45%)",
+      "role": "Electric Cyan — secondary accent, operators, hover borders"
+    },
+    "cyanBright": {
+      "hex": "#38c6f0",
+      "rgb": {
+        "r": 56,
+        "g": 198,
+        "b": 240
+      },
+      "rgbString": "56, 198, 240",
+      "hsl": {
+        "h": 194,
+        "s": 86,
+        "l": 58
+      },
+      "hslString": "hsl(194, 86%, 58%)",
+      "role": "Bright Cyan — regex/escapes, ANSI bright cyan"
+    },
+    "cyanDim": {
+      "hex": "#0e8ab0",
+      "rgb": {
+        "r": 14,
+        "g": 138,
+        "b": 176
+      },
+      "rgbString": "14, 138, 176",
+      "hsl": {
+        "h": 194,
+        "s": 85,
+        "l": 37
+      },
+      "hslString": "hsl(194, 85%, 37%)",
+      "role": "Dim Cyan — ANSI dim cyan"
+    },
+    "teal": {
+      "hex": "#269e9c",
+      "rgb": {
+        "r": 38,
+        "g": 158,
+        "b": 156
+      },
+      "rgbString": "38, 158, 156",
+      "hsl": {
+        "h": 179,
+        "s": 61,
+        "l": 38
+      },
+      "hslString": "hsl(179, 61%, 38%)",
+      "role": "Teal — strings, success/positive, git added, ANSI green"
+    },
+    "tealBright": {
+      "hex": "#38c4c0",
+      "rgb": {
+        "r": 56,
+        "g": 196,
+        "b": 192
+      },
+      "rgbString": "56, 196, 192",
+      "hsl": {
+        "h": 178,
+        "s": 56,
+        "l": 49
+      },
+      "hslString": "hsl(178, 56%, 49%)",
+      "role": "Bright Teal — ANSI bright green"
+    },
+    "tealDim": {
+      "hex": "#208886",
+      "rgb": {
+        "r": 32,
+        "g": 136,
+        "b": 134
+      },
+      "rgbString": "32, 136, 134",
+      "hsl": {
+        "h": 179,
+        "s": 62,
+        "l": 33
+      },
+      "hslString": "hsl(179, 62%, 33%)",
+      "role": "Dim Teal — ANSI dim green"
+    },
+    "red": {
+      "hex": "#f13460",
+      "rgb": {
+        "r": 241,
+        "g": 52,
+        "b": 96
+      },
+      "rgbString": "241, 52, 96",
+      "hsl": {
+        "h": 346,
+        "s": 87,
+        "l": 57
+      },
+      "hslString": "hsl(346, 87%, 57%)",
+      "role": "Crimson — errors, deleted, properties/tags, ANSI red"
+    },
+    "redBright": {
+      "hex": "#ff557a",
+      "rgb": {
+        "r": 255,
+        "g": 85,
+        "b": 122
+      },
+      "rgbString": "255, 85, 122",
+      "hsl": {
+        "h": 347,
+        "s": 100,
+        "l": 67
+      },
+      "hslString": "hsl(347, 100%, 67%)",
+      "role": "Bright Crimson — ANSI bright red"
+    },
+    "redDim": {
+      "hex": "#da2f57",
+      "rgb": {
+        "r": 218,
+        "g": 47,
+        "b": 87
+      },
+      "rgbString": "218, 47, 87",
+      "hsl": {
+        "h": 346,
+        "s": 70,
+        "l": 52
+      },
+      "hslString": "hsl(346, 70%, 52%)",
+      "role": "Dim Crimson — ANSI dim red"
+    },
+    "redHover": {
+      "hex": "#d8254f",
+      "rgb": {
+        "r": 216,
+        "g": 37,
+        "b": 79
+      },
+      "rgbString": "216, 37, 79",
+      "hsl": {
+        "h": 346,
+        "s": 71,
+        "l": 50
+      },
+      "hslString": "hsl(346, 71%, 50%)",
+      "role": "Pressed / deep crimson"
+    },
+    "yellow": {
+      "hex": "#e5c07b",
+      "rgb": {
+        "r": 229,
+        "g": 192,
+        "b": 123
+      },
+      "rgbString": "229, 192, 123",
+      "hsl": {
+        "h": 39,
+        "s": 67,
+        "l": 69
+      },
+      "hslString": "hsl(39, 67%, 69%)",
+      "role": "Warm Gold — warnings, types, enums, ANSI yellow"
+    },
+    "yellowBright": {
+      "hex": "#f6d28a",
+      "rgb": {
+        "r": 246,
+        "g": 210,
+        "b": 138
+      },
+      "rgbString": "246, 210, 138",
+      "hsl": {
+        "h": 40,
+        "s": 86,
+        "l": 75
+      },
+      "hslString": "hsl(40, 86%, 75%)",
+      "role": "Bright Gold — ANSI bright yellow"
+    },
+    "peach": {
+      "hex": "#d19a66",
+      "rgb": {
+        "r": 209,
+        "g": 154,
+        "b": 102
+      },
+      "rgbString": "209, 154, 102",
+      "hsl": {
+        "h": 29,
+        "s": 54,
+        "l": 61
+      },
+      "hslString": "hsl(29, 54%, 61%)",
+      "role": "Amber/Peach — numbers, constants, booleans, ANSI dim yellow"
+    },
+    "orange": {
+      "hex": "#f67400",
+      "rgb": {
+        "r": 246,
+        "g": 116,
+        "b": 0
+      },
+      "rgbString": "246, 116, 0",
+      "hsl": {
+        "h": 28,
+        "s": 100,
+        "l": 48
+      },
+      "hslString": "hsl(28, 100%, 48%)",
+      "role": "Vivid Orange — Starship duration / Rust / Zig badges"
+    },
+    "purple": {
+      "hex": "#a673f5",
+      "rgb": {
+        "r": 166,
+        "g": 115,
+        "b": 245
+      },
+      "rgbString": "166, 115, 245",
+      "hsl": {
+        "h": 264,
+        "s": 87,
+        "l": 71
+      },
+      "hslString": "hsl(264, 87%, 71%)",
+      "role": "Electric Violet — keywords, preproc, ANSI magenta"
+    },
+    "purpleBright": {
+      "hex": "#c094ff",
+      "rgb": {
+        "r": 192,
+        "g": 148,
+        "b": 255
+      },
+      "rgbString": "192, 148, 255",
+      "hsl": {
+        "h": 265,
+        "s": 100,
+        "l": 79
+      },
+      "hslString": "hsl(265, 100%, 79%)",
+      "role": "Bright Violet — ANSI bright magenta"
+    },
+    "purpleDim": {
+      "hex": "#8c5ed4",
+      "rgb": {
+        "r": 140,
+        "g": 94,
+        "b": 212
+      },
+      "rgbString": "140, 94, 212",
+      "hsl": {
+        "h": 263,
+        "s": 58,
+        "l": 60
+      },
+      "hslString": "hsl(263, 58%, 60%)",
+      "role": "Dim Violet — ANSI dim magenta"
+    },
+    "diffAddBg": {
+      "hex": "#132033",
+      "rgb": {
+        "r": 19,
+        "g": 32,
+        "b": 51
+      },
+      "rgbString": "19, 32, 51",
+      "hsl": {
+        "h": 216,
+        "s": 46,
+        "l": 14
+      },
+      "hslString": "hsl(216, 46%, 14%)",
+      "role": "Tinted background for added diff regions"
+    },
+    "diffWarnBg": {
+      "hex": "#282214",
+      "rgb": {
+        "r": 40,
+        "g": 34,
+        "b": 20
+      },
+      "rgbString": "40, 34, 20",
+      "hsl": {
+        "h": 42,
+        "s": 33,
+        "l": 12
+      },
+      "hslString": "hsl(42, 33%, 12%)",
+      "role": "Tinted background for warning / conflict regions"
+    },
+    "diffDeleteBg": {
+      "hex": "#2a121a",
+      "rgb": {
+        "r": 42,
+        "g": 18,
+        "b": 26
+      },
+      "rgbString": "42, 18, 26",
+      "hsl": {
+        "h": 340,
+        "s": 40,
+        "l": 12
+      },
+      "hslString": "hsl(340, 40%, 12%)",
+      "role": "Tinted background for deleted / error regions"
+    }
+  },
+  "semantic": {
+    "bg": {
+      "crust": "crust",
+      "mantle": "mantle",
+      "primary": "base",
+      "surface": "surface0",
+      "elevated": "surface1",
+      "highlight": "surface2",
+      "border": "overlay0",
+      "borderStrong": "overlay1"
+    },
+    "fg": {
+      "primary": "textBright",
+      "editor": "text",
+      "muted": "subtext1",
+      "subtle": "subtext2",
+      "disabled": "comment"
+    },
+    "accent": {
+      "primary": "blue",
+      "primaryHover": "blueHover",
+      "secondary": "cyan",
+      "selectionBgAlpha": "#3c78ff40",
+      "focusRing": "blue"
+    },
+    "status": {
+      "success": "teal",
+      "warning": "yellow",
+      "error": "red",
+      "info": "blue",
+      "hint": "cyan"
+    },
+    "syntax": {
+      "comment": "comment",
+      "docComment": "subtext0",
+      "keyword": "purple",
+      "function": "blue",
+      "method": "blueBright",
+      "type": "yellow",
+      "string": "teal",
+      "stringEscape": "cyanBright",
+      "number": "peach",
+      "constant": "peach",
+      "boolean": "peach",
+      "operator": "cyan",
+      "property": "red",
+      "tag": "red",
+      "variable": "text",
+      "punctuation": "subtext1"
+    }
+  },
+  "ansi": {
+    "normal": {
+      "black": "#3b404a",
+      "red": "#f13460",
+      "green": "#269e9c",
+      "yellow": "#e5c07b",
+      "blue": "#3c78ff",
+      "magenta": "#a673f5",
+      "cyan": "#10a6d4",
+      "white": "#abb2bf"
+    },
+    "bright": {
+      "black": "#707888",
+      "red": "#ff557a",
+      "green": "#38c4c0",
+      "yellow": "#f6d28a",
+      "blue": "#6296ff",
+      "magenta": "#c094ff",
+      "cyan": "#38c6f0",
+      "white": "#f4f4f4"
+    },
+    "dim": {
+      "black": "#5c6370",
+      "red": "#da2f57",
+      "green": "#208886",
+      "yellow": "#d19a66",
+      "blue": "#3062d6",
+      "magenta": "#8c5ed4",
+      "cyan": "#0e8ab0",
+      "white": "#9199a8"
+    }
+  },
+  "typography": {
+    "uiFont": "Google Sans",
+    "monoFont": "JetBrainsMono Nerd Font",
+    "monoTerminalFont": "JetBrainsMono Nerd Font Mono",
+    "fallbackMonoFont": "Google Sans Code"
+  }
+}
