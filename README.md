@@ -34,9 +34,9 @@
 | **Widgets** | Kvantum Engine | `Aether` translucent SVG theme (`kvantum-dark`) |
 | **Windows** | Aurorae v2 | `Aether` minimalist borderless window decoration |
 | **Apps** | GTK 3 · GTK 4 · Libadwaita | `Aether-Dark` GTK theme + user CSS overrides |
-| **Editors** | VS Code · VSCodium · Zed | `lumexren.aether-dark` extension (`.vsix` + source) & `zed/aether.json` |
-| **Terminals** | Konsole · Fish · Zsh · Bash | `Aether.colorscheme` + FZF Aether colors |
-| **CLI & TUI** | Btop · Bat · Starship · Delta | System monitor theme, prompt, `Aether Dark.tmTheme` & Git diff styling |
+| **Editors** | VS Code · VSCodium · Zed · Neovim · Kate | `lumexren.aether-dark` `.vsix`, `zed/aether.json`, Neovim Lua + Lualine, KTextEditor `.theme` |
+| **Terminals** | Konsole · Ghostty · Kitty · Alacritty · WezTerm | Native color schemes for all 5 terminal emulators + Fish/Zsh/Bash FZF colors |
+| **CLI & TUI** | Btop · Bat · Starship · Delta · Fastfetch · Eza · Lazygit · Yazi · Tmux | Full CLI/TUI styling synced with `palette.json` (`Aether Dark.tmTheme`, `eza`, `yazi`, etc.) |
 | **Fonts** | Fontconfig | Subpixel RGB & crisp desktop/code font configuration |
 
 ---
@@ -55,14 +55,14 @@ Useful installer flags:
 
 ```bash
 ./install.sh --dry-run                   # Preview changes without touching files
-./install.sh --only plasma,konsole,bat   # Install selected components only
-./install.sh --skip plasma               # Skip specific components
+./install.sh --only terminals,cli        # Install component groups or individual targets
+./install.sh --skip plasma               # Skip specific components or groups
 ./install.sh --with-shell-aliases        # Also add `alias cat="bat --paging=never"`
 ./install.sh --uninstall                 # Remove Aether files & restore backups
 ```
 
 > [!NOTE]
-> `install.sh` backs up overwritten configs under `~/.local/state/aether-theme-suite/backups/` and applies Plasma 6, Kvantum, Aurorae, GTK 3/4, Konsole, VS Code/VSCodium/Antigravity/Cursor, Zed, Starship, Btop, Bat (`Aether Dark.tmTheme`), Delta, and Fish/Zsh/Bash FZF settings for the current user.
+> `install.sh` backs up overwritten configs under `~/.local/state/aether-theme-suite/backups/` and supports Plasma 6, Kvantum, Aurorae, GTK 3/4, Konsole, Ghostty, Kitty, Alacritty, WezTerm, VS Code/VSCodium/Antigravity/Cursor, Zed, Neovim, Kate/KWrite, Starship, Btop, Bat (`Aether Dark.tmTheme`), Delta, Fastfetch, Eza, Lazygit, Yazi, Tmux, and Fish/Zsh/Bash FZF settings.
 
 ### Recommended Dependencies
 
@@ -82,7 +82,11 @@ aether-theme-suite/
 ├── gtk/             # Aether-Dark GTK 3/4 theme & Libadwaita overrides
 ├── vscode/          # Aether Dark VS Code extension source, .vsix package & preset
 ├── zed/             # Zed editor theme (aether.json)
+├── neovim/          # Neovim Lua colorscheme & Lualine theme
+├── kate/            # Kate / KWrite / KTextEditor syntax-highlighting theme
 ├── konsole/         # Konsole color scheme
+├── terminals/       # Ghostty, Kitty, Alacritty & WezTerm themes
+├── cli/             # Fastfetch, Eza, Lazygit, Yazi & Tmux themes
 ├── starship/        # Starship prompt config
 ├── btop/            # Btop system monitor theme
 ├── bat/             # Bat config & Aether Dark.tmTheme

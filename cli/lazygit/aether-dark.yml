@@ -1,0 +1,29 @@
+# Aether Dark — Lazygit theme (include or merge into ~/.config/lazygit/config.yml)
+gui:
+  nerdFontsVersion: "3"
+  border: rounded
+  theme:
+    activeBorderColor:
+      - "#3c78ff"
+      - bold
+    inactiveBorderColor:
+      - "#262a33"
+    searchingActiveBorderColor:
+      - "#10a6d4"
+      - bold
+    optionsTextColor:
+      - "#10a6d4"
+    selectedLineBgColor:
+      - "#1a1d24"
+    cherryPickedCommitBgColor:
+      - "#132033"
+    cherryPickedCommitFgColor:
+      - "#38c6f0"
+    markedBaseCommitBgColor:
+      - "#282214"
+    markedBaseCommitFgColor:
+      - "#e5c07b"
+    unstagedChangesColor:
+      - "#f13460"
+    defaultFgColor:
+      - "#abb2bf"

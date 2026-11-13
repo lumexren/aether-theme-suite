@@ -1,0 +1,42 @@
+# Aether Dark — WezTerm Color Scheme
+
+[metadata]
+name = "Aether Dark"
+author = "lumexren"
+
+[colors]
+foreground = "#f4f4f4"
+background = "#111216"
+cursor_bg = "#3c78ff"
+cursor_fg = "#111216"
+cursor_border = "#3c78ff"
+selection_fg = "#ffffff"
+selection_bg = "#3c78ff"
+scrollbar_thumb = "#262a33"
+split = "#1f2228"
+
+ansi = ["#3b404a", "#f13460", "#269e9c", "#e5c07b", "#3c78ff", "#a673f5", "#10a6d4", "#abb2bf"]
+brights = ["#707888", "#ff557a", "#38c4c0", "#f6d28a", "#6296ff", "#c094ff", "#38c6f0", "#f4f4f4"]
+
+[colors.tab_bar]
+background = "#0e0f13"
+
+[colors.tab_bar.active_tab]
+bg_color = "#3c78ff"
+fg_color = "#ffffff"
+
+[colors.tab_bar.inactive_tab]
+bg_color = "#16181d"
+fg_color = "#8e96a5"
+
+[colors.tab_bar.inactive_tab_hover]
+bg_color = "#1f2228"
+fg_color = "#f4f4f4"
+
+[colors.tab_bar.new_tab]
+bg_color = "#0e0f13"
+fg_color = "#8e96a5"
+
+[colors.tab_bar.new_tab_hover]
+bg_color = "#1f2228"
+fg_color = "#10a6d4"

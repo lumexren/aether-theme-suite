@@ -1,0 +1,97 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+  "logo": {
+    "color": {
+      "1": "#3c78ff",
+      "2": "#10a6d4"
+    },
+    "padding": {
+      "top": 1,
+      "right": 3
+    }
+  },
+  "display": {
+    "separator": " 󰄾 ",
+    "color": {
+      "keys": "#3c78ff",
+      "title": "#10a6d4",
+      "separator": "#5c6370"
+    }
+  },
+  "modules": [
+    {
+      "type": "title",
+      "color": {
+        "user": "#10a6d4",
+        "at": "#707888",
+        "host": "#3c78ff"
+      }
+    },
+    {
+      "type": "separator",
+      "string": "─"
+    },
+    {
+      "type": "os",
+      "key": "󰣇 OS           ",
+      "keyColor": "#10a6d4"
+    },
+    {
+      "type": "kernel",
+      "key": "󰌽 Kernel       ",
+      "keyColor": "#3c78ff"
+    },
+    {
+      "type": "uptime",
+      "key": "󱑂 Uptime       ",
+      "keyColor": "#269e9c"
+    },
+    {
+      "type": "packages",
+      "key": "󰏖 Packages     ",
+      "keyColor": "#e5c07b"
+    },
+    {
+      "type": "shell",
+      "key": "󰆍 Shell        ",
+      "keyColor": "#a673f5"
+    },
+    {
+      "type": "de",
+      "key": "󰕮 DE           ",
+      "keyColor": "#3c78ff"
+    },
+    {
+      "type": "wm",
+      "key": "󱂬 WM           ",
+      "keyColor": "#10a6d4"
+    },
+    {
+      "type": "theme",
+      "key": "󰉼 Theme        ",
+      "keyColor": "#a673f5"
+    },
+    {
+      "type": "terminal",
+      "key": "󰞷 Terminal     ",
+      "keyColor": "#269e9c"
+    },
+    {
+      "type": "cpu",
+      "key": "󰍛 CPU          ",
+      "keyColor": "#3c78ff"
+    },
+    {
+      "type": "gpu",
+      "key": "󰢮 GPU          ",
+      "keyColor": "#10a6d4"
+    },
+    {
+      "type": "memory",
+      "key": "󰑭 Memory       ",
+      "keyColor": "#f13460"
+    },
+    "break",
+    "colors"
+  ]
+}

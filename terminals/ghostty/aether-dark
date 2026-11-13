@@ -1,0 +1,23 @@
+# Aether Dark — Ghostty Theme
+background = #111216
+foreground = #f4f4f4
+cursor-color = #3c78ff
+cursor-text = #111216
+selection-background = #3c78ff
+selection-foreground = #ffffff
+palette = 0=#3b404a
+palette = 1=#f13460
+palette = 2=#269e9c
+palette = 3=#e5c07b
+palette = 4=#3c78ff
+palette = 5=#a673f5
+palette = 6=#10a6d4
+palette = 7=#abb2bf
+palette = 8=#707888
+palette = 9=#ff557a
+palette = 10=#38c4c0
+palette = 11=#f6d28a
+palette = 12=#6296ff
+palette = 13=#c094ff
+palette = 14=#38c6f0
+palette = 15=#f4f4f4

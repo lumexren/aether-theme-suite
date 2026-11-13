@@ -1,0 +1,76 @@
+# Aether Dark — eza theme
+colourful: true
+
+filekinds:
+  normal: { foreground: "#abb2bf" }
+  directory: { foreground: "#3c78ff", is_bold: true }
+  symlink: { foreground: "#10a6d4" }
+  pipe: { foreground: "#5c6370" }
+  block_device: { foreground: "#e5c07b" }
+  char_device: { foreground: "#e5c07b" }
+  socket: { foreground: "#a673f5" }
+  special: { foreground: "#a673f5" }
+  executable: { foreground: "#269e9c", is_bold: true }
+  mount_point: { foreground: "#38c6f0", is_bold: true }
+
+perms:
+  user_read: { foreground: "#abb2bf" }
+  user_write: { foreground: "#d19a66" }
+  user_execute_file: { foreground: "#269e9c" }
+  user_execute_other: { foreground: "#269e9c" }
+  user_sticky: { foreground: "#a673f5" }
+  user_setuid: { foreground: "#f13460" }
+  user_setgid: { foreground: "#f13460" }
+  group_read: { foreground: "#8e96a5" }
+  group_write: { foreground: "#d19a66" }
+  group_execute: { foreground: "#269e9c" }
+  other_read: { foreground: "#5c6370" }
+  other_write: { foreground: "#f13460" }
+  other_execute: { foreground: "#208886" }
+  special_user_file: { foreground: "#a673f5" }
+  special_other: { foreground: "#5c6370" }
+  attribute: { foreground: "#707888" }
+
+size:
+  major: { foreground: "#5c6370" }
+  minor: { foreground: "#10a6d4" }
+  number_byte: { foreground: "#abb2bf" }
+  number_kilo: { foreground: "#f4f4f4" }
+  number_mega: { foreground: "#10a6d4" }
+  number_giga: { foreground: "#3c78ff" }
+  number_huge: { foreground: "#a673f5" }
+  unit_byte: { foreground: "#8e96a5" }
+  unit_kilo: { foreground: "#8e96a5" }
+  unit_mega: { foreground: "#0e8ab0" }
+  unit_giga: { foreground: "#3062d6" }
+  unit_huge: { foreground: "#8c5ed4" }
+
+users:
+  user_you: { foreground: "#6296ff", is_bold: true }
+  user_root: { foreground: "#f13460", is_bold: true }
+  user_other: { foreground: "#8e96a5" }
+  group_yours: { foreground: "#10a6d4" }
+  group_other: { foreground: "#5c6370" }
+  group_root: { foreground: "#da2f57" }
+
+links:
+  normal: { foreground: "#8e96a5" }
+  multi_link_file: { foreground: "#10a6d4" }
+
+git:
+  new: { foreground: "#269e9c" }
+  modified: { foreground: "#10a6d4" }
+  deleted: { foreground: "#f13460" }
+  renamed: { foreground: "#6296ff" }
+  typechange: { foreground: "#a673f5" }
+  ignored: { foreground: "#5c6370" }
+  conflicted: { foreground: "#e5c07b", is_bold: true }
+
+git_repo:
+  branch_main: { foreground: "#3c78ff", is_bold: true }
+  branch_other: { foreground: "#10a6d4" }
+  git_clean: { foreground: "#269e9c" }
+  git_dirty: { foreground: "#f13460" }
+
+date: { foreground: "#8e96a5" }
+punctuation: { foreground: "#3b404a" }

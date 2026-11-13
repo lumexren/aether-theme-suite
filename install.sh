@@ -6,7 +6,11 @@ STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/aether-theme-suite"
 BACKUP_ROOT="$STATE_DIR/backups"
 BACKUP_DIR=""
 
-ALL_COMPONENTS=(plasma konsole gtk fonts vscode zed starship btop bat delta shell)
+ALL_COMPONENTS=(
+    plasma konsole ghostty kitty alacritty wezterm
+    gtk fonts vscode zed neovim kate
+    starship btop bat delta fastfetch eza lazygit yazi tmux shell
+)
 ONLY_LIST=""
 SKIP_LIST=""
 DRY_RUN=false
@@ -18,9 +22,12 @@ usage() {
 Usage: ./install.sh [OPTIONS]
 
 Options:
-  --only <list>          Comma-separated components to install
-                         (plasma,konsole,gtk,fonts,vscode,zed,starship,btop,bat,delta,shell)
-  --skip <list>          Comma-separated components to skip
+  --only <list>          Comma-separated components or groups to install
+                         Components: plasma,konsole,ghostty,kitty,alacritty,wezterm,
+                                     gtk,fonts,vscode,zed,neovim,kate,
+                                     starship,btop,bat,delta,fastfetch,eza,lazygit,yazi,tmux,shell
+                         Groups:     terminals,editors,cli
+  --skip <list>          Comma-separated components or groups to skip
   --with-shell-aliases   Also add `alias cat="bat --paging=never"` to shell config
   --dry-run              Show what would be done without modifying any files
   --uninstall            Remove installed Aether theme files and restore latest backups
@@ -110,27 +117,39 @@ should_run() {
     return 0
 }
 
-validate_component_list() {
+expand_component_list() {
     local raw="$1"
     [ -z "$raw" ] && return 0
+    local out=()
+    local items=()
     IFS=',' read -ra items <<< "$raw"
     for item in "${items[@]}"; do
-        local valid=false
-        for c in "${ALL_COMPONENTS[@]}"; do
-            if [ "$item" = "$c" ]; then
-                valid=true
-                break
-            fi
-        done
-        if ! $valid; then
-            echo "Error: Unknown component '$item'. Valid: ${ALL_COMPONENTS[*]}" >&2
-            exit 1
-        fi
+        case "$item" in
+            terminals) out+=(konsole ghostty kitty alacritty wezterm) ;;
+            editors)   out+=(vscode zed neovim kate) ;;
+            cli)       out+=(starship btop bat delta fastfetch eza lazygit yazi tmux) ;;
+            *)
+                local valid=false
+                for c in "${ALL_COMPONENTS[@]}"; do
+                    if [ "$item" = "$c" ]; then
+                        valid=true
+                        break
+                    fi
+                done
+                if ! $valid; then
+                    echo "Error: Unknown component '$item'. Valid: ${ALL_COMPONENTS[*]} (groups: terminals, editors, cli)" >&2
+                    exit 1
+                fi
+                out+=("$item")
+                ;;
+        esac
     done
+    local IFS=','
+    printf '%s\n' "${out[*]}"
 }
 
-validate_component_list "$ONLY_LIST"
-validate_component_list "$SKIP_LIST"
+ONLY_LIST="$(expand_component_list "$ONLY_LIST")"
+SKIP_LIST="$(expand_component_list "$SKIP_LIST")"
 
 backup_file() {
     local target="$1"
@@ -216,10 +235,24 @@ uninstall_aether() {
         "$HOME/.config/Kvantum/Aether"
         "$HOME/.local/share/konsole/Aether.colorscheme"
         "$HOME/.local/share/konsole/Aether.profile"
+        "$HOME/.config/ghostty/themes/aether-dark"
+        "$HOME/.config/kitty/themes/aether-dark.conf"
+        "$HOME/.config/kitty/aether-dark.conf"
+        "$HOME/.config/alacritty/themes/aether-dark.toml"
+        "$HOME/.config/wezterm/colors/aether-dark.toml"
         "$HOME/.themes/Aether-Dark"
         "$HOME/.config/zed/themes/aether.json"
+        "$HOME/.config/nvim/colors/aether.lua"
+        "$HOME/.config/nvim/lua/aether"
+        "$HOME/.config/nvim/lua/lualine/themes/aether.lua"
+        "$HOME/.local/share/org.kde.syntax-highlighting/themes/Aether Dark.theme"
         "$HOME/.config/btop/themes/aether.theme"
         "$HOME/.config/bat/themes/Aether Dark.tmTheme"
+        "$HOME/.config/fastfetch/aether.jsonc"
+        "$HOME/.config/eza/theme.yml"
+        "$HOME/.config/lazygit/aether-dark.yml"
+        "$HOME/.config/yazi/theme.toml"
+        "$HOME/.config/tmux/aether.conf"
         "$HOME/.config/fontconfig/conf.d/99-aether.conf"
     )
     for t in "${targets[@]}"; do
@@ -231,6 +264,9 @@ uninstall_aether() {
     remove_aether_shell_block "$HOME/.config/fish/config.fish"
     remove_aether_shell_block "$HOME/.zshrc"
     remove_aether_shell_block "$HOME/.bashrc"
+    remove_aether_shell_block "$HOME/.config/tmux/tmux.conf"
+    remove_aether_shell_block "$HOME/.tmux.conf"
+    remove_aether_shell_block "$HOME/.config/kitty/kitty.conf"
 
     if [ -L "$BACKUP_ROOT/latest" ] && [ -d "$BACKUP_ROOT/latest" ]; then
         local latest
@@ -372,6 +408,50 @@ PYEOF
             fi
         done
     fi
+fi
+
+# 2b. Ghostty
+if should_run "ghostty" && [ -f "$DIR/terminals/ghostty/aether-dark" ]; then
+    log "Applying Ghostty theme..."
+    run_cmd mkdir -p "$HOME/.config/ghostty/themes"
+    run_cmd cp -f "$DIR/terminals/ghostty/aether-dark" "$HOME/.config/ghostty/themes/aether-dark"
+    if [ -f "$HOME/.config/ghostty/config" ]; then
+        backup_file "$HOME/.config/ghostty/config"
+        if ! $DRY_RUN; then
+            if grep -q '^theme[[:space:]]*=' "$HOME/.config/ghostty/config"; then
+                sed -i 's/^theme[[:space:]]*=.*/theme = aether-dark/' "$HOME/.config/ghostty/config"
+            else
+                printf '\ntheme = aether-dark\n' >> "$HOME/.config/ghostty/config"
+            fi
+        fi
+    fi
+fi
+
+# 2c. Kitty
+if should_run "kitty" && [ -f "$DIR/terminals/kitty/aether-dark.conf" ]; then
+    log "Applying Kitty theme..."
+    run_cmd mkdir -p "$HOME/.config/kitty/themes"
+    run_cmd cp -f "$DIR/terminals/kitty/aether-dark.conf" "$HOME/.config/kitty/themes/aether-dark.conf"
+    run_cmd cp -f "$DIR/terminals/kitty/aether-dark.conf" "$HOME/.config/kitty/aether-dark.conf"
+    if [ -f "$HOME/.config/kitty/kitty.conf" ]; then
+        upsert_aether_shell_block "$HOME/.config/kitty/kitty.conf" "# >>> Aether Theme >>>
+include aether-dark.conf
+# <<< Aether Theme <<<"
+    fi
+fi
+
+# 2d. Alacritty
+if should_run "alacritty" && [ -f "$DIR/terminals/alacritty/aether-dark.toml" ]; then
+    log "Applying Alacritty theme..."
+    run_cmd mkdir -p "$HOME/.config/alacritty/themes"
+    run_cmd cp -f "$DIR/terminals/alacritty/aether-dark.toml" "$HOME/.config/alacritty/themes/aether-dark.toml"
+fi
+
+# 2e. WezTerm
+if should_run "wezterm" && [ -f "$DIR/terminals/wezterm/aether-dark.toml" ]; then
+    log "Applying WezTerm color scheme..."
+    run_cmd mkdir -p "$HOME/.config/wezterm/colors"
+    run_cmd cp -f "$DIR/terminals/wezterm/aether-dark.toml" "$HOME/.config/wezterm/colors/aether-dark.toml"
 fi
 
 # 3. GTK 3 & GTK 4 & Libadwaita
@@ -559,6 +639,36 @@ if should_run "zed"; then
     fi
 fi
 
+# 6b. Neovim
+if should_run "neovim" && [ -f "$DIR/neovim/colors/aether.lua" ]; then
+    log "Applying Neovim colorscheme..."
+    run_cmd mkdir -p "$HOME/.config/nvim/colors" \
+                     "$HOME/.config/nvim/lua/aether" \
+                     "$HOME/.config/nvim/lua/lualine/themes"
+    backup_file "$HOME/.config/nvim/colors/aether.lua"
+    backup_file "$HOME/.config/nvim/lua/aether/init.lua"
+    backup_file "$HOME/.config/nvim/lua/lualine/themes/aether.lua"
+    run_cmd cp -f "$DIR/neovim/colors/aether.lua" "$HOME/.config/nvim/colors/aether.lua"
+    run_cmd cp -f "$DIR/neovim/lua/aether/init.lua" "$HOME/.config/nvim/lua/aether/init.lua"
+    run_cmd cp -f "$DIR/neovim/lua/lualine/themes/aether.lua" "$HOME/.config/nvim/lua/lualine/themes/aether.lua"
+fi
+
+# 6c. Kate / KTextEditor
+if should_run "kate" && [ -f "$DIR/kate/Aether Dark.theme" ]; then
+    log "Applying Kate / KTextEditor color theme..."
+    run_cmd mkdir -p "$HOME/.local/share/org.kde.syntax-highlighting/themes"
+    run_cmd cp -f "$DIR/kate/Aether Dark.theme" "$HOME/.local/share/org.kde.syntax-highlighting/themes/Aether Dark.theme"
+    if ! $DRY_RUN; then
+        for kde_rc in "$HOME/.config/katerc" "$HOME/.config/kwriterc"; do
+            if [ -f "$kde_rc" ]; then
+                backup_file "$kde_rc"
+                try_cmd kwriteconfig6 --file "$kde_rc" --group "KTextEditor Renderer" --key "Auto Color Theme Selection" "false"
+                try_cmd kwriteconfig6 --file "$kde_rc" --group "KTextEditor Renderer" --key "Color Theme" "Aether Dark"
+            fi
+        done
+    fi
+fi
+
 # 7. Starship
 if should_run "starship" && [ -f "$DIR/starship/starship.toml" ]; then
     log "Applying Starship config..."
@@ -618,6 +728,51 @@ if should_run "delta" && command -v delta >/dev/null 2>&1; then
         git config --global delta.file-decoration-style "#3c78ff ul"
         git config --global delta.hunk-header-decoration-style "#10a6d4 box"
     fi
+fi
+
+# 10b. Fastfetch
+if should_run "fastfetch" && [ -f "$DIR/cli/fastfetch/aether.jsonc" ]; then
+    log "Applying Fastfetch theme..."
+    run_cmd mkdir -p "$HOME/.config/fastfetch"
+    run_cmd cp -f "$DIR/cli/fastfetch/aether.jsonc" "$HOME/.config/fastfetch/aether.jsonc"
+fi
+
+# 10c. Eza
+if should_run "eza" && [ -f "$DIR/cli/eza/theme.yml" ]; then
+    log "Applying Eza theme..."
+    run_cmd mkdir -p "$HOME/.config/eza"
+    backup_file "$HOME/.config/eza/theme.yml"
+    run_cmd cp -f "$DIR/cli/eza/theme.yml" "$HOME/.config/eza/theme.yml"
+fi
+
+# 10d. Lazygit
+if should_run "lazygit" && [ -f "$DIR/cli/lazygit/aether-dark.yml" ]; then
+    log "Applying Lazygit theme..."
+    run_cmd mkdir -p "$HOME/.config/lazygit"
+    run_cmd cp -f "$DIR/cli/lazygit/aether-dark.yml" "$HOME/.config/lazygit/aether-dark.yml"
+fi
+
+# 10e. Yazi
+if should_run "yazi" && [ -f "$DIR/cli/yazi/theme.toml" ]; then
+    log "Applying Yazi theme..."
+    run_cmd mkdir -p "$HOME/.config/yazi"
+    backup_file "$HOME/.config/yazi/theme.toml"
+    run_cmd cp -f "$DIR/cli/yazi/theme.toml" "$HOME/.config/yazi/theme.toml"
+fi
+
+# 10f. Tmux
+if should_run "tmux" && [ -f "$DIR/cli/tmux/aether.conf" ]; then
+    log "Applying Tmux theme..."
+    run_cmd mkdir -p "$HOME/.config/tmux"
+    backup_file "$HOME/.config/tmux/aether.conf"
+    run_cmd cp -f "$DIR/cli/tmux/aether.conf" "$HOME/.config/tmux/aether.conf"
+    for tmux_rc in "$HOME/.config/tmux/tmux.conf" "$HOME/.tmux.conf"; do
+        if [ -f "$tmux_rc" ]; then
+            upsert_aether_shell_block "$tmux_rc" "# >>> Aether Theme >>>
+source-file ~/.config/tmux/aether.conf
+# <<< Aether Theme <<<"
+        fi
+    done
 fi
 
 # 11. Shell FZF (+ optional bat alias)

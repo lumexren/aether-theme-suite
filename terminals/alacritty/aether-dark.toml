@@ -1,0 +1,61 @@
+# Aether Dark — Alacritty Theme
+
+[colors.primary]
+background = "#111216"
+foreground = "#f4f4f4"
+dim_foreground = "#9199a8"
+bright_foreground = "#ffffff"
+
+[colors.cursor]
+text = "#111216"
+cursor = "#3c78ff"
+
+[colors.vi_mode_cursor]
+text = "#111216"
+cursor = "#10a6d4"
+
+[colors.selection]
+text = "#ffffff"
+background = "#3c78ff"
+
+[colors.search.matches]
+foreground = "#111216"
+background = "#10a6d4"
+
+[colors.search.focused_match]
+foreground = "#ffffff"
+background = "#3c78ff"
+
+[colors.footer_bar]
+background = "#0e0f13"
+foreground = "#abb2bf"
+
+[colors.normal]
+black = "#3b404a"
+red = "#f13460"
+green = "#269e9c"
+yellow = "#e5c07b"
+blue = "#3c78ff"
+magenta = "#a673f5"
+cyan = "#10a6d4"
+white = "#abb2bf"
+
+[colors.bright]
+black = "#707888"
+red = "#ff557a"
+green = "#38c4c0"
+yellow = "#f6d28a"
+blue = "#6296ff"
+magenta = "#c094ff"
+cyan = "#38c6f0"
+white = "#f4f4f4"
+
+[colors.dim]
+black = "#5c6370"
+red = "#da2f57"
+green = "#208886"
+yellow = "#d19a66"
+blue = "#3062d6"
+magenta = "#8c5ed4"
+cyan = "#0e8ab0"
+white = "#9199a8"
