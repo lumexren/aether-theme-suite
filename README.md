@@ -77,8 +77,7 @@ Useful installer flags:
 
 **Built with ❤️ by lumexren**
 
-*Star ⭐ this repo if you find it useful!*<br>
-*Join our [Fluxer](https://fluxer.gg/xnTFlhV0) for support and updates!*
+*Star ⭐ this repo if you find it useful!*
 
 This project is licensed under the **MIT License**. See [LICENSE](./LICENSE) for details.
 
