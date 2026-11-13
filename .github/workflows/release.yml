@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate palette sync & scripts
+        run: |
+          python3 scripts/sync-palette.py --check
+          bash -n install.sh scripts/package-vscode.sh
+
+      - name: Build release archives
+        run: |
+          mkdir -p dist
+          cp vscode/aether-dark-*.vsix dist/
+          tar --exclude='.git' --exclude='dist' -czf dist/aether-theme-suite-${{ github.ref_name }}.tar.gz .
+          tar -czf dist/aether-plasma-sddm-${{ github.ref_name }}.tar.gz plasma gtk konsole
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: dist/*

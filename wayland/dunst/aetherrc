@@ -1,0 +1,25 @@
+# Aether Dark — Dunst Theme
+[global]
+    font = Google Sans 10
+    frame_width = 1
+    frame_color = "#262a33"
+    separator_color = frame
+    corner_radius = 10
+
+[urgency_low]
+    background = "#111216"
+    foreground = "#9199a8"
+    frame_color = "#1f2228"
+    timeout = 4
+
+[urgency_normal]
+    background = "#16181d"
+    foreground = "#f4f4f4"
+    frame_color = "#3c78ff"
+    timeout = 6
+
+[urgency_critical]
+    background = "#16181d"
+    foreground = "#ffffff"
+    frame_color = "#f13460"
+    timeout = 0

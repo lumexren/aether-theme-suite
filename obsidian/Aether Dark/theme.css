@@ -1,0 +1,50 @@
+/* Aether Dark — Obsidian Theme */
+.theme-dark {
+  --background-primary: #111216;
+  --background-primary-alt: #16181d;
+  --background-secondary: #0e0f13;
+  --background-secondary-alt: #171920;
+  --background-modifier-hover: #1a1d24;
+  --background-modifier-active-hover: #1f2228;
+  --background-modifier-border: #1f2228;
+  --background-modifier-border-hover: #262a33;
+  --background-modifier-border-focus: #3c78ff;
+  --background-modifier-error: #f13460;
+  --background-modifier-success: #269e9c;
+
+  --text-normal: #abb2bf;
+  --text-muted: #8e96a5;
+  --text-faint: #5c6370;
+  --text-on-accent: #ffffff;
+  --text-accent: #6296ff;
+  --text-accent-hover: #38c6f0;
+  --text-error: #f13460;
+  --text-selection: rgba(60, 120, 255, 0.30);
+
+  --interactive-normal: #1a1d24;
+  --interactive-hover: #1f2228;
+  --interactive-accent: #3c78ff;
+  --interactive-accent-hover: #2d65e6;
+
+  --h1-color: #6296ff;
+  --h2-color: #38c6f0;
+  --h3-color: #38c4c0;
+  --h4-color: #c094ff;
+  --h5-color: #f6d28a;
+  --h6-color: #9199a8;
+
+  --code-background: #16181d;
+  --code-normal: #abb2bf;
+  --code-comment: #5c6370;
+  --code-function: #3c78ff;
+  --code-keyword: #a673f5;
+  --code-string: #269e9c;
+  --code-operator: #10a6d4;
+  --code-value: #d19a66;
+
+  --graph-line: #262a33;
+  --graph-node: #3c78ff;
+  --graph-node-focused: #10a6d4;
+  --graph-node-tag: #269e9c;
+  --graph-node-attachment: #a673f5;
+}

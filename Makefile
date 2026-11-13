@@ -1,4 +1,4 @@
-.PHONY: check sync package-vscode install dry-run uninstall
+.PHONY: check sync artwork package-vscode install dry-run uninstall
 
 check:
 	python3 scripts/sync-palette.py --check
@@ -6,6 +6,9 @@ check:
 
 sync:
 	python3 scripts/sync-palette.py --write
+
+artwork:
+	python3 scripts/render-artwork.py
 
 package-vscode:
 	./scripts/package-vscode.sh

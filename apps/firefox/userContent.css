@@ -1,0 +1,7 @@
+/* Aether Dark — Firefox / Zen userContent.css */
+@-moz-document url("about:blank"), url("about:newtab"), url("about:home"), url("about:privatebrowsing") {
+  body {
+    background-color: #111216 !important;
+    color: #abb2bf !important;
+  }
+}

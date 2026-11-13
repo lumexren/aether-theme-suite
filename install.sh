@@ -7,9 +7,11 @@ BACKUP_ROOT="$STATE_DIR/backups"
 BACKUP_DIR=""
 
 ALL_COMPONENTS=(
-    plasma konsole ghostty kitty alacritty wezterm
-    gtk fonts vscode zed neovim kate
-    starship btop bat delta fastfetch eza lazygit yazi tmux shell
+    plasma sddm konsole ghostty kitty alacritty wezterm
+    gtk fonts vscode zed neovim kate jetbrains
+    obsidian discord firefox
+    waybar rofi fuzzel dunst mako
+    starship btop bat delta fastfetch eza lazygit yazi tmux zathura cava shell
 )
 ONLY_LIST=""
 SKIP_LIST=""
@@ -23,10 +25,12 @@ Usage: ./install.sh [OPTIONS]
 
 Options:
   --only <list>          Comma-separated components or groups to install
-                         Components: plasma,konsole,ghostty,kitty,alacritty,wezterm,
-                                     gtk,fonts,vscode,zed,neovim,kate,
-                                     starship,btop,bat,delta,fastfetch,eza,lazygit,yazi,tmux,shell
-                         Groups:     terminals,editors,cli
+                         Components: plasma,sddm,konsole,ghostty,kitty,alacritty,wezterm,
+                                     gtk,fonts,vscode,zed,neovim,kate,jetbrains,
+                                     obsidian,discord,firefox,
+                                     waybar,rofi,fuzzel,dunst,mako,
+                                     starship,btop,bat,delta,fastfetch,eza,lazygit,yazi,tmux,zathura,cava,shell
+                         Groups:     terminals,editors,apps,wayland,cli
   --skip <list>          Comma-separated components or groups to skip
   --with-shell-aliases   Also add `alias cat="bat --paging=never"` to shell config
   --dry-run              Show what would be done without modifying any files
@@ -71,9 +75,9 @@ while [ $# -gt 0 ]; do
     esac
 done
 
-if [ "${EUID:-$(id -u)}" -eq 0 ] && [ "${AETHER_ALLOW_ROOT:-0}" != "1" ]; then
+if [ "${EUID:-$(id -u)}" -eq 0 ] && [ "${AETHER_ALLOW_ROOT:-0}" != "1" ] && [ "$ONLY_LIST" != "sddm" ]; then
     echo "Error: Do not run install.sh as root/sudo; it configures \$HOME." >&2
-    echo "Run as your regular user (or set AETHER_ALLOW_ROOT=1 to override)." >&2
+    echo "Run as your regular user (or run 'sudo ./install.sh --only sddm' / set AETHER_ALLOW_ROOT=1)." >&2
     exit 1
 fi
 
@@ -126,8 +130,10 @@ expand_component_list() {
     for item in "${items[@]}"; do
         case "$item" in
             terminals) out+=(konsole ghostty kitty alacritty wezterm) ;;
-            editors)   out+=(vscode zed neovim kate) ;;
-            cli)       out+=(starship btop bat delta fastfetch eza lazygit yazi tmux) ;;
+            editors)   out+=(vscode zed neovim kate jetbrains) ;;
+            apps)      out+=(obsidian discord firefox) ;;
+            wayland)   out+=(waybar rofi fuzzel dunst mako) ;;
+            cli)       out+=(starship btop bat delta fastfetch eza lazygit yazi tmux zathura cava) ;;
             *)
                 local valid=false
                 for c in "${ALL_COMPONENTS[@]}"; do
@@ -137,7 +143,7 @@ expand_component_list() {
                     fi
                 done
                 if ! $valid; then
-                    echo "Error: Unknown component '$item'. Valid: ${ALL_COMPONENTS[*]} (groups: terminals, editors, cli)" >&2
+                    echo "Error: Unknown component '$item'. Valid: ${ALL_COMPONENTS[*]} (groups: terminals, editors, apps, wayland, cli)" >&2
                     exit 1
                 fi
                 out+=("$item")
@@ -253,6 +259,17 @@ uninstall_aether() {
         "$HOME/.config/lazygit/aether-dark.yml"
         "$HOME/.config/yazi/theme.toml"
         "$HOME/.config/tmux/aether.conf"
+        "$HOME/.config/zathura/aether-dark"
+        "$HOME/.config/cava/themes/aether"
+        "$HOME/.config/waybar/aether.css"
+        "$HOME/.config/rofi/themes/aether.rasi"
+        "$HOME/.config/fuzzel/aether.ini"
+        "$HOME/.config/dunst/dunstrc.d/99-aether.conf"
+        "$HOME/.config/mako/aether.conf"
+        "$HOME/.config/vesktop/themes/aether-dark.theme.css"
+        "$HOME/.config/Vencord/themes/aether-dark.theme.css"
+        "$HOME/.config/BetterDiscord/themes/aether-dark.theme.css"
+        "$HOME/.local/share/aether-theme-suite"
         "$HOME/.config/fontconfig/conf.d/99-aether.conf"
     )
     for t in "${targets[@]}"; do
@@ -267,6 +284,7 @@ uninstall_aether() {
     remove_aether_shell_block "$HOME/.config/tmux/tmux.conf"
     remove_aether_shell_block "$HOME/.tmux.conf"
     remove_aether_shell_block "$HOME/.config/kitty/kitty.conf"
+    remove_aether_shell_block "$HOME/.config/zathura/zathurarc"
 
     if [ -L "$BACKUP_ROOT/latest" ] && [ -d "$BACKUP_ROOT/latest" ]; then
         local latest
@@ -333,8 +351,8 @@ if should_run "plasma"; then
             kwriteconfig6 --file "$HOME/.config/kdeglobals" --group KDE --key widgetStyle "kvantum-dark"
             kwriteconfig6 --file "$HOME/.config/kdeglobals" --group Icons --key Theme "Papirus-Dark"
             kwriteconfig6 --file "$HOME/.config/kcminputrc" --group Mouse --key cursorTheme "Bibata-Modern-Ice"
-            kwriteconfig6 --file "$HOME/.config/ksplashrc" --group KSplash --key Engine "none"
-            kwriteconfig6 --file "$HOME/.config/ksplashrc" --group KSplash --key Theme "None"
+            kwriteconfig6 --file "$HOME/.config/ksplashrc" --group KSplash --key Engine "KSplashQML"
+            kwriteconfig6 --file "$HOME/.config/ksplashrc" --group KSplash --key Theme "Aether"
 
             # Font rendering
             kwriteconfig6 --file "$HOME/.config/kdeglobals" --group General --key font "Google Sans,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0"
@@ -358,6 +376,21 @@ if should_run "plasma"; then
             /usr/lib/plasma-apply-aurorae "__aurorae__svg__Aether" >/dev/null 2>&1 || true
         fi
         try_cmd kvantummanager --set Aether
+    fi
+fi
+
+# 1b. SDDM Login Theme
+if should_run "sddm" && [ -d "$DIR/plasma/sddm/Aether" ]; then
+    SDDM_DEST="/usr/share/sddm/themes/Aether"
+    if [ -w "/usr/share/sddm/themes" ] || { [ ! -e "/usr/share/sddm/themes" ] && [ -w "/usr/share/sddm" ]; } || $DRY_RUN; then
+        log "Applying SDDM Login Theme..."
+        run_cmd mkdir -p "$SDDM_DEST"
+        run_cmd cp -rf "$DIR/plasma/sddm/Aether/"* "$SDDM_DEST/"
+        if [ -f "$DIR/plasma/wallpaper/Aether/contents/images/3840x2160.png" ]; then
+            run_cmd cp -f "$DIR/plasma/wallpaper/Aether/contents/images/3840x2160.png" "$SDDM_DEST/background.png"
+        fi
+    else
+        log "Skipping SDDM theme ($SDDM_DEST requires root; run: sudo ./install.sh --only sddm)"
     fi
 fi
 
@@ -773,6 +806,130 @@ source-file ~/.config/tmux/aether.conf
 # <<< Aether Theme <<<"
         fi
     done
+fi
+
+# 10g. JetBrains IDEs
+if should_run "jetbrains" && [ -f "$DIR/jetbrains/Aether_Dark.icls" ]; then
+    log "Applying JetBrains color scheme..."
+    run_cmd mkdir -p "$HOME/.local/share/aether-theme-suite/jetbrains"
+    run_cmd cp -f "$DIR/jetbrains/Aether_Dark.icls" "$HOME/.local/share/aether-theme-suite/jetbrains/Aether_Dark.icls"
+    shopt -s nullglob
+    jb_dirs=("$HOME/.config/JetBrains/"*/)
+    shopt -u nullglob
+    for jb_dir in "${jb_dirs[@]}"; do
+        run_cmd mkdir -p "${jb_dir}colors"
+        run_cmd cp -f "$DIR/jetbrains/Aether_Dark.icls" "${jb_dir}colors/Aether_Dark.icls"
+    done
+fi
+
+# 10h. Obsidian
+if should_run "obsidian" && [ -d "$DIR/obsidian/Aether Dark" ]; then
+    log "Staging Obsidian theme..."
+    run_cmd mkdir -p "$HOME/.local/share/aether-theme-suite/obsidian/Aether Dark"
+    run_cmd cp -rf "$DIR/obsidian/Aether Dark/"* "$HOME/.local/share/aether-theme-suite/obsidian/Aether Dark/"
+    shopt -s nullglob
+    vault_obs_dirs=("$HOME/Documents/"*/.obsidian "$HOME/Notes/"*/.obsidian "$HOME/Obsidian/"*/.obsidian)
+    shopt -u nullglob
+    for obs_dir in "${vault_obs_dirs[@]}"; do
+        run_cmd mkdir -p "$obs_dir/themes/Aether Dark"
+        run_cmd cp -rf "$DIR/obsidian/Aether Dark/"* "$obs_dir/themes/Aether Dark/"
+    done
+fi
+
+# 10i. Discord / Vesktop / Vencord
+if should_run "discord" && [ -f "$DIR/apps/discord/aether-dark.theme.css" ]; then
+    log "Applying Discord / Vesktop theme..."
+    discord_installed=false
+    for client_dir in "$HOME/.config/vesktop" "$HOME/.config/Vencord" "$HOME/.config/BetterDiscord"; do
+        if [ -d "$client_dir" ]; then
+            run_cmd mkdir -p "$client_dir/themes"
+            run_cmd cp -f "$DIR/apps/discord/aether-dark.theme.css" "$client_dir/themes/aether-dark.theme.css"
+            discord_installed=true
+        fi
+    done
+    if ! $discord_installed; then
+        run_cmd mkdir -p "$HOME/.config/vesktop/themes"
+        run_cmd cp -f "$DIR/apps/discord/aether-dark.theme.css" "$HOME/.config/vesktop/themes/aether-dark.theme.css"
+    fi
+fi
+
+# 10j. Firefox / Zen Browser
+if should_run "firefox" && [ -f "$DIR/apps/firefox/userChrome.css" ]; then
+    log "Applying Firefox / Zen CSS..."
+    run_cmd mkdir -p "$HOME/.local/share/aether-theme-suite/firefox"
+    run_cmd cp -f "$DIR/apps/firefox/userChrome.css" "$HOME/.local/share/aether-theme-suite/firefox/userChrome.css"
+    run_cmd cp -f "$DIR/apps/firefox/userContent.css" "$HOME/.local/share/aether-theme-suite/firefox/userContent.css"
+    shopt -s nullglob
+    ff_profiles=("$HOME/.mozilla/firefox/"*.default* "$HOME/.zen/"*.Default*)
+    shopt -u nullglob
+    for prof in "${ff_profiles[@]}"; do
+        [ -d "$prof" ] || continue
+        run_cmd mkdir -p "$prof/chrome"
+        backup_file "$prof/chrome/userChrome.css"
+        backup_file "$prof/chrome/userContent.css"
+        run_cmd cp -f "$DIR/apps/firefox/userChrome.css" "$prof/chrome/userChrome.css"
+        run_cmd cp -f "$DIR/apps/firefox/userContent.css" "$prof/chrome/userContent.css"
+    done
+fi
+
+# 10k. Waybar
+if should_run "waybar" && [ -f "$DIR/wayland/waybar/aether.css" ]; then
+    log "Applying Waybar CSS..."
+    run_cmd mkdir -p "$HOME/.config/waybar"
+    backup_file "$HOME/.config/waybar/aether.css"
+    run_cmd cp -f "$DIR/wayland/waybar/aether.css" "$HOME/.config/waybar/aether.css"
+fi
+
+# 10l. Rofi
+if should_run "rofi" && [ -f "$DIR/wayland/rofi/aether.rasi" ]; then
+    log "Applying Rofi theme..."
+    run_cmd mkdir -p "$HOME/.config/rofi/themes"
+    run_cmd cp -f "$DIR/wayland/rofi/aether.rasi" "$HOME/.config/rofi/themes/aether.rasi"
+fi
+
+# 10m. Fuzzel
+if should_run "fuzzel" && [ -f "$DIR/wayland/fuzzel/aether.ini" ]; then
+    log "Applying Fuzzel theme..."
+    run_cmd mkdir -p "$HOME/.config/fuzzel"
+    backup_file "$HOME/.config/fuzzel/aether.ini"
+    run_cmd cp -f "$DIR/wayland/fuzzel/aether.ini" "$HOME/.config/fuzzel/aether.ini"
+fi
+
+# 10n. Dunst
+if should_run "dunst" && [ -f "$DIR/wayland/dunst/aetherrc" ]; then
+    log "Applying Dunst theme drop-in..."
+    run_cmd mkdir -p "$HOME/.config/dunst/dunstrc.d"
+    backup_file "$HOME/.config/dunst/dunstrc.d/99-aether.conf"
+    run_cmd cp -f "$DIR/wayland/dunst/aetherrc" "$HOME/.config/dunst/dunstrc.d/99-aether.conf"
+fi
+
+# 10o. Mako
+if should_run "mako" && [ -f "$DIR/wayland/mako/config" ]; then
+    log "Applying Mako theme..."
+    run_cmd mkdir -p "$HOME/.config/mako"
+    backup_file "$HOME/.config/mako/aether.conf"
+    run_cmd cp -f "$DIR/wayland/mako/config" "$HOME/.config/mako/aether.conf"
+fi
+
+# 10p. Zathura
+if should_run "zathura" && [ -f "$DIR/cli/zathura/aether-dark" ]; then
+    log "Applying Zathura theme..."
+    run_cmd mkdir -p "$HOME/.config/zathura"
+    backup_file "$HOME/.config/zathura/aether-dark"
+    run_cmd cp -f "$DIR/cli/zathura/aether-dark" "$HOME/.config/zathura/aether-dark"
+    if [ -f "$HOME/.config/zathura/zathurarc" ]; then
+        upsert_aether_shell_block "$HOME/.config/zathura/zathurarc" "# >>> Aether Theme >>>
+include aether-dark
+# <<< Aether Theme <<<"
+    fi
+fi
+
+# 10q. Cava
+if should_run "cava" && [ -f "$DIR/cli/cava/aether.conf" ]; then
+    log "Applying Cava theme..."
+    run_cmd mkdir -p "$HOME/.config/cava/themes"
+    backup_file "$HOME/.config/cava/themes/aether"
+    run_cmd cp -f "$DIR/cli/cava/aether.conf" "$HOME/.config/cava/themes/aether"
 fi
 
 # 11. Shell FZF (+ optional bat alias)

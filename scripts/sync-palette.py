@@ -1071,6 +1071,540 @@ def render_kate_theme(pal: dict) -> str:
     return json.dumps(theme, indent=2) + "\n"
 
 
+def render_swatch_svg(pal: dict) -> str:
+    c = pal["colors"]
+    chips = [
+        ("base", c["base"]["hex"], c["overlay1"]["hex"]),
+        ("surface0", c["surface0"]["hex"], c["overlay1"]["hex"]),
+        ("blue", c["blue"]["hex"], c["blue"]["hex"]),
+        ("cyan", c["cyan"]["hex"], c["cyan"]["hex"]),
+        ("teal", c["teal"]["hex"], c["teal"]["hex"]),
+        ("red", c["red"]["hex"], c["red"]["hex"]),
+        ("purple", c["purple"]["hex"], c["purple"]["hex"]),
+    ]
+    rects = []
+    for idx, (_, fill, stroke) in enumerate(chips):
+        x = 6 + idx * 36
+        rects.append(
+            f'  <rect x="{x}" y="5" width="28" height="18" rx="9" fill="{fill}" stroke="{stroke}" stroke-width="1"/>'
+        )
+    body = "\n".join(rects)
+    return (
+        '<svg xmlns="http://www.w3.org/2000/svg" width="256" height="28" viewBox="0 0 256 28" role="img" aria-label="Aether palette swatches">\n'
+        f"{body}\n"
+        "</svg>\n"
+    )
+
+
+def render_jetbrains_icls(pal: dict) -> str:
+    c = pal["colors"]
+    syn = pal["semantic"]["syntax"]
+    h = lambda k: c[k]["hex"].lstrip("#")
+    s = lambda k: c[syn[k]]["hex"].lstrip("#")
+
+    color_opts = [
+        ("ADDED_LINES_COLOR", h("teal")),
+        ("ANNOTATIONS_COLOR", h("subtext1")),
+        ("CARET_COLOR", h("blue")),
+        ("CARET_ROW_COLOR", h("surface1")),
+        ("CONSOLE_BACKGROUND_KEY", h("base")),
+        ("DELETED_LINES_COLOR", h("red")),
+        ("DOC_COMMENT_GUIDE", h("overlay0")),
+        ("FILESTATUS_ADDED", h("teal")),
+        ("FILESTATUS_DELETED", h("red")),
+        ("FILESTATUS_MODIFIED", h("cyan")),
+        ("FILESTATUS_UNKNOWN", h("yellow")),
+        ("GUTTER_BACKGROUND", h("base")),
+        ("INDENT_GUIDE", h("overlay0")),
+        ("LINE_NUMBERS_COLOR", h("comment")),
+        ("LINE_NUMBER_ON_CARET_ROW_COLOR", h("blue")),
+        ("MODIFIED_LINES_COLOR", h("cyan")),
+        ("READONLY_BACKGROUND", h("surface0")),
+        ("RIGHT_MARGIN_COLOR", h("overlay0")),
+        ("SELECTED_INDENT_GUIDE", h("overlay2")),
+        ("SELECTED_TEARLINE_COLOR", h("blue")),
+        ("SELECTION_BACKGROUND", h("blueDim")),
+        ("SELECTION_FOREGROUND", h("white")),
+        ("TEARLINE_COLOR", h("overlay0")),
+        ("WHITESPACES", h("overlay2")),
+    ]
+    colors_xml = "\n".join(f'    <option name="{k}" value="{v}" />' for k, v in color_opts)
+
+    def attr(name: str, fg: str | None = None, bg: str | None = None, font_type: str | None = None, eff_color: str | None = None, eff_type: str | None = None) -> str:
+        opts = []
+        if fg:
+            opts.append(f'      <option name="FOREGROUND" value="{fg}" />')
+        if bg:
+            opts.append(f'      <option name="BACKGROUND" value="{bg}" />')
+        if font_type:
+            opts.append(f'      <option name="FONT_TYPE" value="{font_type}" />')
+        if eff_color:
+            opts.append(f'      <option name="EFFECT_COLOR" value="{eff_color}" />')
+        if eff_type:
+            opts.append(f'      <option name="EFFECT_TYPE" value="{eff_type}" />')
+        inner = "\n".join(opts)
+        return f'    <option name="{name}">\n      <value>\n{inner}\n      </value>\n    </option>'
+
+    attrs = "\n".join(
+        [
+            attr("TEXT", fg=h("text"), bg=h("base")),
+            attr("DEFAULT_BLOCK_COMMENT", fg=s("comment"), font_type="2"),
+            attr("DEFAULT_LINE_COMMENT", fg=s("comment"), font_type="2"),
+            attr("DEFAULT_DOC_COMMENT", fg=s("docComment"), font_type="2"),
+            attr("DEFAULT_KEYWORD", fg=s("keyword"), font_type="1"),
+            attr("DEFAULT_FUNCTION_DECLARATION", fg=s("function")),
+            attr("DEFAULT_FUNCTION_CALL", fg=s("function")),
+            attr("DEFAULT_INSTANCE_METHOD", fg=s("method")),
+            attr("DEFAULT_STATIC_METHOD", fg=s("method")),
+            attr("DEFAULT_CLASS_NAME", fg=s("type")),
+            attr("DEFAULT_INTERFACE_NAME", fg=s("type")),
+            attr("DEFAULT_STRING", fg=s("string")),
+            attr("DEFAULT_VALID_STRING_ESCAPE", fg=s("stringEscape")),
+            attr("DEFAULT_NUMBER", fg=s("number")),
+            attr("DEFAULT_CONSTANT", fg=s("constant")),
+            attr("DEFAULT_OPERATION_SIGN", fg=s("operator")),
+            attr("DEFAULT_BRACES", fg=s("punctuation")),
+            attr("DEFAULT_BRACKETS", fg=s("punctuation")),
+            attr("DEFAULT_PARENTHS", fg=s("punctuation")),
+            attr("DEFAULT_INSTANCE_FIELD", fg=s("property")),
+            attr("DEFAULT_TAG", fg=s("tag")),
+            attr("DEFAULT_LOCAL_VARIABLE", fg=s("variable")),
+            attr("DEFAULT_PARAMETER", fg=h("textBright")),
+            attr("DIFF_INSERTED", bg=h("diffAddBg")),
+            attr("DIFF_MODIFIED", bg=h("diffWarnBg")),
+            attr("DIFF_DELETED", bg=h("diffDeleteBg")),
+            attr("ERRORS_ATTRIBUTES", eff_color=h("red"), eff_type="2"),
+            attr("WARNING_ATTRIBUTES", eff_color=h("yellow"), eff_type="2"),
+            attr("MATCHED_BRACE_ATTRIBUTES", bg=h("overlay1"), font_type="1"),
+            attr("SEARCH_RESULT_ATTRIBUTES", bg=h("diffWarnBg")),
+            attr("TODO_DEFAULT_ATTRIBUTES", fg=h("cyan"), font_type="2"),
+        ]
+    )
+
+    return f"""<scheme name="Aether Dark" version="142" parent_scheme="Darcula">
+  <metaInfo>
+    <property name="created">2026-01-01T00:00:00</property>
+    <property name="ide">Idea</property>
+    <property name="originalScheme">Aether Dark</property>
+  </metaInfo>
+  <colors>
+{colors_xml}
+  </colors>
+  <attributes>
+{attrs}
+  </attributes>
+</scheme>
+"""
+
+
+def render_obsidian_manifest() -> str:
+    return json.dumps(
+        {
+            "name": "Aether Dark",
+            "version": "1.0.0",
+            "minAppVersion": "1.5.0",
+            "author": "lumexren",
+            "authorUrl": "https://github.com/lumexren/aether-theme-suite",
+        },
+        indent=2,
+    ) + "\n"
+
+
+def render_obsidian_css(pal: dict) -> str:
+    c = pal["colors"]
+    return f"""/* Aether Dark — Obsidian Theme */
+.theme-dark {{
+  --background-primary: {c['base']['hex']};
+  --background-primary-alt: {c['surface0']['hex']};
+  --background-secondary: {c['mantle']['hex']};
+  --background-secondary-alt: {c['surface1']['hex']};
+  --background-modifier-hover: {c['surface2']['hex']};
+  --background-modifier-active-hover: {c['overlay0']['hex']};
+  --background-modifier-border: {c['overlay0']['hex']};
+  --background-modifier-border-hover: {c['overlay1']['hex']};
+  --background-modifier-border-focus: {c['blue']['hex']};
+  --background-modifier-error: {c['red']['hex']};
+  --background-modifier-success: {c['teal']['hex']};
+
+  --text-normal: {c['text']['hex']};
+  --text-muted: {c['subtext1']['hex']};
+  --text-faint: {c['comment']['hex']};
+  --text-on-accent: {c['white']['hex']};
+  --text-accent: {c['blueBright']['hex']};
+  --text-accent-hover: {c['cyanBright']['hex']};
+  --text-error: {c['red']['hex']};
+  --text-selection: rgba({c['blue']['rgbString']}, 0.30);
+
+  --interactive-normal: {c['surface2']['hex']};
+  --interactive-hover: {c['overlay0']['hex']};
+  --interactive-accent: {c['blue']['hex']};
+  --interactive-accent-hover: {c['blueHover']['hex']};
+
+  --h1-color: {c['blueBright']['hex']};
+  --h2-color: {c['cyanBright']['hex']};
+  --h3-color: {c['tealBright']['hex']};
+  --h4-color: {c['purpleBright']['hex']};
+  --h5-color: {c['yellowBright']['hex']};
+  --h6-color: {c['subtext2']['hex']};
+
+  --code-background: {c['surface0']['hex']};
+  --code-normal: {c['text']['hex']};
+  --code-comment: {c['comment']['hex']};
+  --code-function: {c['blue']['hex']};
+  --code-keyword: {c['purple']['hex']};
+  --code-string: {c['teal']['hex']};
+  --code-operator: {c['cyan']['hex']};
+  --code-value: {c['peach']['hex']};
+
+  --graph-line: {c['overlay1']['hex']};
+  --graph-node: {c['blue']['hex']};
+  --graph-node-focused: {c['cyan']['hex']};
+  --graph-node-tag: {c['teal']['hex']};
+  --graph-node-attachment: {c['purple']['hex']};
+}}
+"""
+
+
+def render_discord_css(pal: dict) -> str:
+    c = pal["colors"]
+    return f"""/**
+ * @name Aether Dark
+ * @author lumexren
+ * @version 1.0.0
+ * @description Deep obsidian & electric royal-blue theme for Discord / Vesktop / Vencord.
+ */
+
+.theme-dark,
+:root {{
+  --background-primary: {c['base']['hex']};
+  --background-secondary: {c['surface0']['hex']};
+  --background-secondary-alt: {c['mantle']['hex']};
+  --background-tertiary: {c['crust']['hex']};
+  --background-accent: {c['surface2']['hex']};
+  --background-floating: {c['surface1']['hex']};
+  --channeltextarea-background: {c['surface0']['hex']};
+  --bg-overlay-app-frame: {c['crust']['hex']};
+  --bg-overlay-chat: {c['base']['hex']};
+  --home-background: {c['base']['hex']};
+
+  --text-normal: {c['text']['hex']};
+  --text-muted: {c['subtext1']['hex']};
+  --text-link: {c['cyanBright']['hex']};
+  --header-primary: {c['textBright']['hex']};
+  --header-secondary: {c['subtext2']['hex']};
+  --interactive-normal: {c['subtext2']['hex']};
+  --interactive-hover: {c['textBright']['hex']};
+  --interactive-active: {c['white']['hex']};
+  --interactive-muted: {c['comment']['hex']};
+
+  --brand-experiment: {c['blue']['hex']};
+  --brand-experiment-560: {c['blueHover']['hex']};
+  --brand-500: {c['blue']['hex']};
+  --status-positive: {c['teal']['hex']};
+  --status-warning: {c['yellow']['hex']};
+  --status-danger: {c['red']['hex']};
+  --mention-background: rgba({c['blue']['rgbString']}, 0.18);
+  --mention-foreground: {c['blueBright']['hex']};
+  --scrollbar-thin-thumb: {c['overlay1']['hex']};
+  --scrollbar-auto-thumb: {c['overlay1']['hex']};
+  --scrollbar-auto-track: {c['mantle']['hex']};
+}}
+"""
+
+
+def render_firefox_chrome(pal: dict) -> str:
+    c = pal["colors"]
+    return f"""/* Aether Dark — Firefox / Zen userChrome.css */
+:root {{
+  --lwt-accent-color: {c['crust']['hex']} !important;
+  --lwt-text-color: {c['textBright']['hex']} !important;
+  --toolbar-bgcolor: {c['base']['hex']} !important;
+  --toolbar-color: {c['text']['hex']} !important;
+  --toolbar-field-background-color: {c['surface0']['hex']} !important;
+  --toolbar-field-color: {c['textBright']['hex']} !important;
+  --toolbar-field-border-color: {c['overlay0']['hex']} !important;
+  --toolbar-field-focus-background-color: {c['surface1']['hex']} !important;
+  --toolbar-field-focus-border-color: {c['blue']['hex']} !important;
+  --tab-selected-bgcolor: {c['surface0']['hex']} !important;
+  --tab-selected-textcolor: {c['textBright']['hex']} !important;
+  --lwt-tab-line-color: {c['blue']['hex']} !important;
+  --arrowpanel-background: {c['surface0']['hex']} !important;
+  --arrowpanel-color: {c['textBright']['hex']} !important;
+  --arrowpanel-border-color: {c['overlay1']['hex']} !important;
+  --sidebar-background-color: {c['mantle']['hex']} !important;
+  --sidebar-text-color: {c['text']['hex']} !important;
+}}
+
+#urlbar[focused="true"] > #urlbar-background {{
+  border: 1px solid {c['blue']['hex']} !important;
+}}
+"""
+
+
+def render_firefox_content(pal: dict) -> str:
+    c = pal["colors"]
+    return f"""/* Aether Dark — Firefox / Zen userContent.css */
+@-moz-document url("about:blank"), url("about:newtab"), url("about:home"), url("about:privatebrowsing") {{
+  body {{
+    background-color: {c['base']['hex']} !important;
+    color: {c['text']['hex']} !important;
+  }}
+}}
+"""
+
+
+def render_waybar_css(pal: dict) -> str:
+    c = pal["colors"]
+    lines = ["/* Aether Dark — Waybar Theme */"]
+    for key in ["crust", "mantle", "base", "surface0", "surface1", "surface2", "overlay0", "overlay1", "comment", "subtext1", "text", "textBright", "blue", "cyan", "teal", "red", "yellow", "purple"]:
+        lines.append(f"@define-color aether_{key} {c[key]['hex']};")
+    lines.append(
+        f"""
+* {{
+  font-family: "Google Sans", "JetBrainsMono Nerd Font", sans-serif;
+  font-size: 13px;
+}}
+
+window#waybar {{
+  background: rgba({c['base']['rgbString']}, 0.88);
+  color: @aether_textBright;
+  border-bottom: 1px solid @aether_overlay0;
+}}
+
+#workspaces button {{
+  color: @aether_subtext1;
+  background: transparent;
+  padding: 2px 8px;
+  border-radius: 6px;
+}}
+
+#workspaces button.active {{
+  color: {c['white']['hex']};
+  background: @aether_blue;
+}}
+
+#workspaces button.urgent {{
+  color: {c['white']['hex']};
+  background: @aether_red;
+}}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#tray {{
+  background: @aether_surface0;
+  color: @aether_textBright;
+  border: 1px solid @aether_overlay0;
+  border-radius: 8px;
+  padding: 2px 10px;
+  margin: 4px 3px;
+}}"""
+    )
+    return "\n".join(lines) + "\n"
+
+
+def render_rofi_rasi(pal: dict) -> str:
+    c = pal["colors"]
+    return f"""/* Aether Dark — Rofi Theme */
+* {{
+  bg:        {c['base']['hex']};
+  bg-alt:    {c['surface0']['hex']};
+  bg-focus:  {c['surface2']['hex']};
+  border:    {c['overlay1']['hex']};
+  fg:        {c['textBright']['hex']};
+  fg-muted:  {c['subtext1']['hex']};
+  accent:    {c['blue']['hex']};
+  urgent:    {c['red']['hex']};
+
+  background-color: transparent;
+  text-color: @fg;
+  font: "Google Sans 11";
+}}
+
+window {{
+  background-color: @bg;
+  border: 1px solid;
+  border-color: @border;
+  border-radius: 12px;
+  padding: 14px;
+  width: 560px;
+}}
+
+inputbar {{
+  background-color: @bg-alt;
+  border: 1px solid;
+  border-color: @accent;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin: 0 0 10px 0;
+  spacing: 8px;
+  children: [prompt, entry];
+}}
+
+prompt {{
+  text-color: @accent;
+}}
+
+entry {{
+  placeholder-color: @fg-muted;
+}}
+
+listview {{
+  lines: 8;
+  spacing: 4px;
+}}
+
+element {{
+  padding: 8px 10px;
+  border-radius: 8px;
+}}
+
+element normal.urgent,
+element alternate.urgent {{
+  text-color: @urgent;
+}}
+
+element selected.normal {{
+  background-color: @accent;
+  text-color: {c['white']['hex']};
+}}
+"""
+
+
+def render_fuzzel_ini(pal: dict) -> str:
+    c = pal["colors"]
+    h = lambda k: c[k]["hex"].lstrip("#")
+    return f"""# Aether Dark — Fuzzel Theme
+[main]
+font=Google Sans:size=11
+
+[colors]
+background={h('base')}eb
+text={h('textBright')}ff
+prompt={h('blue')}ff
+placeholder={h('comment')}ff
+input={h('textBright')}ff
+match={h('cyanBright')}ff
+selection={h('blue')}ff
+selection-text={h('white')}ff
+selection-match={h('white')}ff
+counter={h('subtext1')}ff
+border={h('overlay1')}ff
+
+[border]
+width=1
+radius=12
+"""
+
+
+def render_dunst_rc(pal: dict) -> str:
+    c = pal["colors"]
+    return f"""# Aether Dark — Dunst Theme
+[global]
+    font = Google Sans 10
+    frame_width = 1
+    frame_color = "{c['overlay1']['hex']}"
+    separator_color = frame
+    corner_radius = 10
+
+[urgency_low]
+    background = "{c['base']['hex']}"
+    foreground = "{c['subtext2']['hex']}"
+    frame_color = "{c['overlay0']['hex']}"
+    timeout = 4
+
+[urgency_normal]
+    background = "{c['surface0']['hex']}"
+    foreground = "{c['textBright']['hex']}"
+    frame_color = "{c['blue']['hex']}"
+    timeout = 6
+
+[urgency_critical]
+    background = "{c['surface0']['hex']}"
+    foreground = "{c['white']['hex']}"
+    frame_color = "{c['red']['hex']}"
+    timeout = 0
+"""
+
+
+def render_mako_conf(pal: dict) -> str:
+    c = pal["colors"]
+    return f"""# Aether Dark — Mako Theme
+font=Google Sans 10
+background-color={c['surface0']['hex']}e6
+text-color={c['textBright']['hex']}
+border-color={c['blue']['hex']}
+border-size=1
+border-radius=10
+progress-color=over {c['blue']['hex']}
+
+[urgency=low]
+background-color={c['base']['hex']}e6
+text-color={c['subtext2']['hex']}
+border-color={c['overlay0']['hex']}
+
+[urgency=high]
+border-color={c['red']['hex']}
+"""
+
+
+def render_zathura_rc(pal: dict) -> str:
+    c = pal["colors"]
+    return f"""# Aether Dark — Zathura Theme
+set notification-error-bg       "{c['surface0']['hex']}"
+set notification-error-fg       "{c['red']['hex']}"
+set notification-warning-bg     "{c['surface0']['hex']}"
+set notification-warning-fg     "{c['yellow']['hex']}"
+set notification-bg             "{c['surface0']['hex']}"
+set notification-fg             "{c['textBright']['hex']}"
+
+set completion-bg               "{c['surface0']['hex']}"
+set completion-fg               "{c['text']['hex']}"
+set completion-group-bg         "{c['mantle']['hex']}"
+set completion-group-fg         "{c['subtext2']['hex']}"
+set completion-highlight-bg     "{c['blue']['hex']}"
+set completion-highlight-fg     "{c['white']['hex']}"
+
+set index-bg                    "{c['base']['hex']}"
+set index-fg                    "{c['text']['hex']}"
+set index-active-bg             "{c['blue']['hex']}"
+set index-active-fg             "{c['white']['hex']}"
+
+set inputbar-bg                 "{c['surface0']['hex']}"
+set inputbar-fg                 "{c['textBright']['hex']}"
+set statusbar-bg                "{c['mantle']['hex']}"
+set statusbar-fg                "{c['subtext2']['hex']}"
+
+set highlight-color             "rgba({c['blue']['rgbString']}, 0.35)"
+set highlight-active-color      "rgba({c['cyan']['rgbString']}, 0.55)"
+
+set default-bg                  "{c['base']['hex']}"
+set default-fg                  "{c['textBright']['hex']}"
+set render-loading              true
+set render-loading-bg           "{c['base']['hex']}"
+set render-loading-fg           "{c['textBright']['hex']}"
+set recolor-lightcolor          "{c['base']['hex']}"
+set recolor-darkcolor           "{c['textBright']['hex']}"
+"""
+
+
+def render_cava_conf(pal: dict) -> str:
+    c = pal["colors"]
+    return f"""# Aether Dark — Cava Theme
+[color]
+background = '{c['base']['hex']}'
+foreground = '{c['blue']['hex']}'
+gradient = 1
+gradient_color_1 = '{c['blueDim']['hex']}'
+gradient_color_2 = '{c['blue']['hex']}'
+gradient_color_3 = '{c['cyan']['hex']}'
+gradient_color_4 = '{c['tealBright']['hex']}'
+"""
+
+
 def sync_or_check_file(path: Path, expected: str, write: bool, errors: list[str]) -> None:
     current = path.read_text(encoding="utf-8") if path.is_file() else None
     if current != expected:
@@ -1094,6 +1628,7 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
     known_hexes = {v["hex"].lower() for v in c.values()}
 
     generated = [
+        (ROOT / "palette" / "swatch.svg", render_swatch_svg(pal)),
         (ROOT / "konsole" / "Aether.colorscheme", render_konsole(pal)),
         (ROOT / "terminals" / "ghostty" / "aether-dark", render_ghostty(pal)),
         (ROOT / "terminals" / "kitty" / "aether-dark.conf", render_kitty(pal)),
@@ -1105,9 +1640,22 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
         (ROOT / "cli" / "lazygit" / "aether-dark.yml", render_lazygit(pal)),
         (ROOT / "cli" / "yazi" / "theme.toml", render_yazi(pal)),
         (ROOT / "cli" / "tmux" / "aether.conf", render_tmux(pal)),
+        (ROOT / "cli" / "zathura" / "aether-dark", render_zathura_rc(pal)),
+        (ROOT / "cli" / "cava" / "aether.conf", render_cava_conf(pal)),
         (ROOT / "neovim" / "lua" / "aether" / "init.lua", render_nvim_init(pal)),
         (ROOT / "neovim" / "lua" / "lualine" / "themes" / "aether.lua", render_lualine(pal)),
         (ROOT / "kate" / "Aether Dark.theme", render_kate_theme(pal)),
+        (ROOT / "jetbrains" / "Aether_Dark.icls", render_jetbrains_icls(pal)),
+        (ROOT / "obsidian" / "Aether Dark" / "manifest.json", render_obsidian_manifest()),
+        (ROOT / "obsidian" / "Aether Dark" / "theme.css", render_obsidian_css(pal)),
+        (ROOT / "apps" / "discord" / "aether-dark.theme.css", render_discord_css(pal)),
+        (ROOT / "apps" / "firefox" / "userChrome.css", render_firefox_chrome(pal)),
+        (ROOT / "apps" / "firefox" / "userContent.css", render_firefox_content(pal)),
+        (ROOT / "wayland" / "waybar" / "aether.css", render_waybar_css(pal)),
+        (ROOT / "wayland" / "rofi" / "aether.rasi", render_rofi_rasi(pal)),
+        (ROOT / "wayland" / "fuzzel" / "aether.ini", render_fuzzel_ini(pal)),
+        (ROOT / "wayland" / "dunst" / "aetherrc", render_dunst_rc(pal)),
+        (ROOT / "wayland" / "mako" / "config", render_mako_conf(pal)),
     ]
     for path, content in generated:
         sync_or_check_file(path, content, write, errors)
@@ -1126,6 +1674,7 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
     for json_path in [
         ROOT / "cli" / "fastfetch" / "aether.jsonc",
         ROOT / "kate" / "Aether Dark.theme",
+        ROOT / "obsidian" / "Aether Dark" / "manifest.json",
     ]:
         if json_path.is_file():
             with json_path.open("r", encoding="utf-8") as f:
@@ -1136,6 +1685,8 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
         ROOT / "fontconfig" / "fonts.conf",
         ROOT / "fontconfig" / "local.conf",
         ROOT / "bat" / "themes" / "Aether Dark.tmTheme",
+        ROOT / "jetbrains" / "Aether_Dark.icls",
+        ROOT / "palette" / "swatch.svg",
     ]:
         try:
             ET.parse(xml_path)

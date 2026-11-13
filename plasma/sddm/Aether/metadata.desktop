@@ -1,0 +1,14 @@
+[SddmGreeterTheme]
+Name=Aether Dark
+Description=Deep obsidian SDDM theme for Aether Theme Suite
+Author=lumexren
+License=MIT
+Type=sddm-theme
+Version=1.0
+Website=https://github.com/lumexren/aether-theme-suite
+Screenshot=preview.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+Theme-Id=aether
+Theme-API=2.0
+QtVersion=6

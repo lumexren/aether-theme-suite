@@ -1,0 +1,42 @@
+/**
+ * @name Aether Dark
+ * @author lumexren
+ * @version 1.0.0
+ * @description Deep obsidian & electric royal-blue theme for Discord / Vesktop / Vencord.
+ */
+
+.theme-dark,
+:root {
+  --background-primary: #111216;
+  --background-secondary: #16181d;
+  --background-secondary-alt: #0e0f13;
+  --background-tertiary: #0c0d11;
+  --background-accent: #1a1d24;
+  --background-floating: #171920;
+  --channeltextarea-background: #16181d;
+  --bg-overlay-app-frame: #0c0d11;
+  --bg-overlay-chat: #111216;
+  --home-background: #111216;
+
+  --text-normal: #abb2bf;
+  --text-muted: #8e96a5;
+  --text-link: #38c6f0;
+  --header-primary: #f4f4f4;
+  --header-secondary: #9199a8;
+  --interactive-normal: #9199a8;
+  --interactive-hover: #f4f4f4;
+  --interactive-active: #ffffff;
+  --interactive-muted: #5c6370;
+
+  --brand-experiment: #3c78ff;
+  --brand-experiment-560: #2d65e6;
+  --brand-500: #3c78ff;
+  --status-positive: #269e9c;
+  --status-warning: #e5c07b;
+  --status-danger: #f13460;
+  --mention-background: rgba(60, 120, 255, 0.18);
+  --mention-foreground: #6296ff;
+  --scrollbar-thin-thumb: #262a33;
+  --scrollbar-auto-thumb: #262a33;
+  --scrollbar-auto-track: #0e0f13;
+}

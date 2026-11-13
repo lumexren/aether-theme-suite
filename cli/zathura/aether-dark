@@ -1,0 +1,35 @@
+# Aether Dark — Zathura Theme
+set notification-error-bg       "#16181d"
+set notification-error-fg       "#f13460"
+set notification-warning-bg     "#16181d"
+set notification-warning-fg     "#e5c07b"
+set notification-bg             "#16181d"
+set notification-fg             "#f4f4f4"
+
+set completion-bg               "#16181d"
+set completion-fg               "#abb2bf"
+set completion-group-bg         "#0e0f13"
+set completion-group-fg         "#9199a8"
+set completion-highlight-bg     "#3c78ff"
+set completion-highlight-fg     "#ffffff"
+
+set index-bg                    "#111216"
+set index-fg                    "#abb2bf"
+set index-active-bg             "#3c78ff"
+set index-active-fg             "#ffffff"
+
+set inputbar-bg                 "#16181d"
+set inputbar-fg                 "#f4f4f4"
+set statusbar-bg                "#0e0f13"
+set statusbar-fg                "#9199a8"
+
+set highlight-color             "rgba(60, 120, 255, 0.35)"
+set highlight-active-color      "rgba(16, 166, 212, 0.55)"
+
+set default-bg                  "#111216"
+set default-fg                  "#f4f4f4"
+set render-loading              true
+set render-loading-bg           "#111216"
+set render-loading-fg           "#f4f4f4"
+set recolor-lightcolor          "#111216"
+set recolor-darkcolor           "#f4f4f4"

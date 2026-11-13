@@ -30,3 +30,4 @@ jobs:
         run: |
           ./install.sh --dry-run
           ./install.sh --only bat,starship --dry-run
+          ./install.sh --only wayland,apps --dry-run

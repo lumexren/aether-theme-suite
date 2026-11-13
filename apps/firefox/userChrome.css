@@ -1,0 +1,24 @@
+/* Aether Dark — Firefox / Zen userChrome.css */
+:root {
+  --lwt-accent-color: #0c0d11 !important;
+  --lwt-text-color: #f4f4f4 !important;
+  --toolbar-bgcolor: #111216 !important;
+  --toolbar-color: #abb2bf !important;
+  --toolbar-field-background-color: #16181d !important;
+  --toolbar-field-color: #f4f4f4 !important;
+  --toolbar-field-border-color: #1f2228 !important;
+  --toolbar-field-focus-background-color: #171920 !important;
+  --toolbar-field-focus-border-color: #3c78ff !important;
+  --tab-selected-bgcolor: #16181d !important;
+  --tab-selected-textcolor: #f4f4f4 !important;
+  --lwt-tab-line-color: #3c78ff !important;
+  --arrowpanel-background: #16181d !important;
+  --arrowpanel-color: #f4f4f4 !important;
+  --arrowpanel-border-color: #262a33 !important;
+  --sidebar-background-color: #0e0f13 !important;
+  --sidebar-text-color: #abb2bf !important;
+}
+
+#urlbar[focused="true"] > #urlbar-background {
+  border: 1px solid #3c78ff !important;
+}

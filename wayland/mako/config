@@ -1,0 +1,16 @@
+# Aether Dark — Mako Theme
+font=Google Sans 10
+background-color=#16181de6
+text-color=#f4f4f4
+border-color=#3c78ff
+border-size=1
+border-radius=10
+progress-color=over #3c78ff
+
+[urgency=low]
+background-color=#111216e6
+text-color=#9199a8
+border-color=#1f2228
+
+[urgency=high]
+border-color=#f13460

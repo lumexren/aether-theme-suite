@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="28" viewBox="0 0 256 28" role="img" aria-label="Aether palette swatches">
+  <rect x="6" y="5" width="28" height="18" rx="9" fill="#111216" stroke="#262a33" stroke-width="1"/>
+  <rect x="42" y="5" width="28" height="18" rx="9" fill="#16181d" stroke="#262a33" stroke-width="1"/>
+  <rect x="78" y="5" width="28" height="18" rx="9" fill="#3c78ff" stroke="#3c78ff" stroke-width="1"/>
+  <rect x="114" y="5" width="28" height="18" rx="9" fill="#10a6d4" stroke="#10a6d4" stroke-width="1"/>
+  <rect x="150" y="5" width="28" height="18" rx="9" fill="#269e9c" stroke="#269e9c" stroke-width="1"/>
+  <rect x="186" y="5" width="28" height="18" rx="9" fill="#f13460" stroke="#f13460" stroke-width="1"/>
+  <rect x="222" y="5" width="28" height="18" rx="9" fill="#a673f5" stroke="#a673f5" stroke-width="1"/>
+</svg>

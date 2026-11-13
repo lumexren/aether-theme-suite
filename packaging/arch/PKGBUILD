@@ -1,0 +1,66 @@
+# Maintainer: lumexren <lumexren@gmail.com>
+pkgname=aether-theme-suite-git
+pkgver=1.0.0.r0.g0000000
+pkgrel=1
+pkgdesc="Unified Deep Obsidian theme suite for KDE Plasma 6, SDDM, editors, terminals, Wayland, and CLI tools"
+arch=('any')
+url="https://github.com/lumexren/aether-theme-suite"
+license=('MIT')
+depends=()
+makedepends=('git' 'python')
+optdepends=(
+    'plasma-desktop: KDE Plasma 6 desktop integration'
+    'kvantum: Translucent SVG widget styling'
+    'sddm: Aether Dark SDDM 6 login theme'
+    'papirus-icon-theme: Recommended icon theme'
+    'ttf-jetbrains-mono-nerd: Recommended monospace font'
+)
+provides=('aether-theme-suite')
+conflicts=('aether-theme-suite')
+source=("git+${url}.git")
+sha256sums=('SKIP')
+
+pkgver() {
+    cd "${srcdir}/aether-theme-suite"
+    printf "1.0.0.r%s.g%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+check() {
+    cd "${srcdir}/aether-theme-suite"
+    python3 scripts/sync-palette.py --check
+}
+
+package() {
+    cd "${srcdir}/aether-theme-suite"
+
+    install -d "${pkgdir}/usr/share/color-schemes" \
+               "${pkgdir}/usr/share/plasma/look-and-feel" \
+               "${pkgdir}/usr/share/plasma/desktoptheme" \
+               "${pkgdir}/usr/share/aurorae/themes" \
+               "${pkgdir}/usr/share/wallpapers" \
+               "${pkgdir}/usr/share/Kvantum" \
+               "${pkgdir}/usr/share/sddm/themes/Aether" \
+               "${pkgdir}/usr/share/themes" \
+               "${pkgdir}/usr/share/konsole" \
+               "${pkgdir}/usr/share/org.kde.syntax-highlighting/themes" \
+               "${pkgdir}/usr/share/aether-theme-suite"
+
+    cp -a plasma/color-schemes/Aether.colors "${pkgdir}/usr/share/color-schemes/"
+    cp -a plasma/look-and-feel/Aether "${pkgdir}/usr/share/plasma/look-and-feel/"
+    cp -a plasma/desktoptheme/Aether "${pkgdir}/usr/share/plasma/desktoptheme/"
+    cp -a plasma/aurorae/Aether "${pkgdir}/usr/share/aurorae/themes/"
+    cp -a plasma/wallpaper/Aether "${pkgdir}/usr/share/wallpapers/"
+    cp -a plasma/kvantum/Aether "${pkgdir}/usr/share/Kvantum/"
+
+    cp -a plasma/sddm/Aether/. "${pkgdir}/usr/share/sddm/themes/Aether/"
+    cp -a plasma/wallpaper/Aether/contents/images/3840x2160.png "${pkgdir}/usr/share/sddm/themes/Aether/background.png"
+
+    cp -a gtk/Aether-Dark "${pkgdir}/usr/share/themes/"
+    cp -a konsole/Aether.colorscheme "${pkgdir}/usr/share/konsole/"
+    cp -a "kate/Aether Dark.theme" "${pkgdir}/usr/share/org.kde.syntax-highlighting/themes/"
+
+    cp -a palette terminals cli wayland apps jetbrains obsidian vscode zed neovim starship btop bat fontconfig \
+          "${pkgdir}/usr/share/aether-theme-suite/"
+    install -Dm755 install.sh "${pkgdir}/usr/share/aether-theme-suite/install.sh"
+    install -Dm644 LICENSE "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
+}
