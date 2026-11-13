@@ -1082,12 +1082,17 @@ def sync_or_check_file(path: Path, expected: str, write: bool, errors: list[str]
             errors.append(f"{path.relative_to(ROOT)} is out of sync with palette.json")
 
 
+def check_hex_tokens(path: Path, known_hexes: set[str], errors: list[str]) -> None:
+    for hx in set(re.findall(r"#[0-9a-fA-F]{6}", path.read_text(encoding="utf-8"))):
+        if hx.lower() not in known_hexes:
+            errors.append(f"{path.relative_to(ROOT)} uses non-palette color {hx}")
+
+
 def validate_repo(pal: dict, write: bool) -> list[str]:
     errors: list[str] = []
     c = pal["colors"]
     known_hexes = {v["hex"].lower() for v in c.values()}
 
-    # 1. Generated/synced files
     generated = [
         (ROOT / "konsole" / "Aether.colorscheme", render_konsole(pal)),
         (ROOT / "terminals" / "ghostty" / "aether-dark", render_ghostty(pal)),
@@ -1107,7 +1112,6 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
     for path, content in generated:
         sync_or_check_file(path, content, write, errors)
 
-    # 2. TOML validation & palette hex check
     for toml_path in [
         ROOT / "starship" / "starship.toml",
         ROOT / "terminals" / "alacritty" / "aether-dark.toml",
@@ -1117,11 +1121,8 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
         if toml_path.is_file():
             with toml_path.open("rb") as f:
                 tomllib.load(f)
-            for hx in set(re.findall(r"#[0-9a-fA-F]{6}", toml_path.read_text(encoding="utf-8"))):
-                if hx.lower() not in known_hexes:
-                    errors.append(f"{toml_path.relative_to(ROOT)} uses non-palette color {hx}")
+            check_hex_tokens(toml_path, known_hexes, errors)
 
-    # 3. Fastfetch & Kate JSON validation & hex check
     for json_path in [
         ROOT / "cli" / "fastfetch" / "aether.jsonc",
         ROOT / "kate" / "Aether Dark.theme",
@@ -1129,11 +1130,8 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
         if json_path.is_file():
             with json_path.open("r", encoding="utf-8") as f:
                 json.load(f)
-            for hx in set(re.findall(r"#[0-9a-fA-F]{6}", json_path.read_text(encoding="utf-8"))):
-                if hx.lower() not in known_hexes:
-                    errors.append(f"{json_path.relative_to(ROOT)} uses non-palette color {hx}")
+            check_hex_tokens(json_path, known_hexes, errors)
 
-    # 4. XML validation
     for xml_path in [
         ROOT / "fontconfig" / "fonts.conf",
         ROOT / "fontconfig" / "local.conf",
@@ -1144,7 +1142,6 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
         except ET.ParseError as exc:
             errors.append(f"Invalid XML in {xml_path.relative_to(ROOT)}: {exc}")
 
-    # 5. Plasma metadata JSON & desktoptheme/colorscheme checks
     for meta_path in [
         ROOT / "plasma" / "look-and-feel" / "Aether" / "metadata.json",
         ROOT / "plasma" / "desktoptheme" / "Aether" / "metadata.json",
@@ -1175,13 +1172,11 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
         if cp.get("Colors:Selection", "BackgroundNormal", fallback="") != hex_to_rgb_csv(c["blue"]["hex"]):
             errors.append(f"{kde_colors.relative_to(ROOT)} Selection.BackgroundNormal != blue")
 
-    # 6. Kvantum GeneralColors check
     kv_text = (ROOT / "plasma" / "kvantum" / "Aether" / "Aether.kvconfig").read_text(encoding="utf-8")
     for legacy in ("#edf0f2", "#eefcff", "#556064", "#47535a"):
         if legacy in kv_text.lower():
             errors.append(f"plasma/kvantum/Aether/Aether.kvconfig still contains legacy color {legacy}")
 
-    # 7. GTK tokens check
     gtk_css = (ROOT / "gtk" / "gtk.css").read_text(encoding="utf-8")
     for token, pal_key in [
         ("accent_color", "blue"),
@@ -1195,7 +1190,6 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
         if expected_line not in gtk_css:
             errors.append(f"gtk/gtk.css missing '{expected_line}'")
 
-    # 8. Zed & VS Code JSON validation & key palette checks
     zed_path = ROOT / "zed" / "aether.json"
     with zed_path.open("r", encoding="utf-8") as f:
         zed = json.load(f)
@@ -1221,7 +1215,6 @@ def validate_repo(pal: dict, write: bool) -> list[str]:
     if vsc_theme["colors"].get("focusBorder") != c["blue"]["hex"]:
         errors.append("VS Code focusBorder != blue")
 
-    # 9. VSIX matches source extension
     vsix_path = ROOT / "vscode" / f"{vsc_pkg['name']}-{vsc_pkg['version']}.vsix"
     if not vsix_path.is_file():
         errors.append(f"Missing packaged VSIX: {vsix_path.relative_to(ROOT)}")
