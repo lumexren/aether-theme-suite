@@ -1,0 +1,41 @@
+name: New App / Port Request
+description: Request Aether theme support for another terminal, editor, CLI tool, or desktop component.
+title: "[Port]: "
+labels: ["enhancement"]
+body:
+  - type: input
+    id: app_name
+    attributes:
+      label: Application / Target Name
+      placeholder: e.g. Obsidian, Waybar, Foot, Helix, SDDM
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Terminal Emulator
+        - Code / Text Editor
+        - CLI / TUI Tool
+        - Desktop / WM / Bar / Launcher
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: homepage
+    attributes:
+      label: Upstream Project or Theme Docs URL
+      placeholder: https://...
+    validations:
+      required: false
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details & Config Format
+      description: Share how the app loads themes (file path, format like TOML/JSON/CSS/Lua) and any specific UI elements to prioritize.
+    validations:
+      required: true

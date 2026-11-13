@@ -1,0 +1,28 @@
+name: Color / Contrast Fix
+description: Flag unreadable text, low contrast, or syntax highlighting tokens that diverge from palette.json.
+title: "[Theme]: "
+labels: ["theme", "contrast"]
+body:
+  - type: input
+    id: target
+    attributes:
+      label: Affected File or App
+      placeholder: e.g. neovim/lua/aether/init.lua, GTK4 popover, Kate Markdown
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: Contrast / Token Issue
+      description: Explain which UI element or syntax scope looks wrong or hard to read, and which Aether token should be used instead.
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Drag and drop a screenshot showing the issue.
+    validations:
+      required: false

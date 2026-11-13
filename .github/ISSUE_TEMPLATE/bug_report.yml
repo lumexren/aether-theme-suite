@@ -1,0 +1,70 @@
+name: Bug Report
+description: Report broken styling, unreadable contrast, or installer issues.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting an issue with **Aether Theme Suite**. Please fill in the details below so it can be reproduced and fixed quickly.
+
+  - type: dropdown
+    id: component
+    attributes:
+      label: Component
+      description: Which part of Aether Theme Suite is affected?
+      options:
+        - KDE Plasma 6 (Look & Feel / Desktop Theme / Color Scheme)
+        - Kvantum
+        - Aurorae v2
+        - GTK 3 / GTK 4 / Libadwaita
+        - VS Code / VSCodium / Antigravity / Cursor
+        - Zed
+        - Neovim
+        - Kate / KWrite
+        - Konsole
+        - Ghostty / Kitty / Alacritty / WezTerm
+        - CLI & TUI (Starship, Btop, Bat, Delta, Fastfetch, Eza, Lazygit, Yazi, Tmux)
+        - Installer (install.sh)
+        - Fontconfig
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the visual bug, color mismatch, or error clearly.
+      placeholder: e.g. Selected text in Dolphin is unreadable, or install.sh failed at...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this?
+      placeholder: |
+        1. Run `./install.sh ...`
+        2. Open ...
+        3. Observe ...
+    validations:
+      required: false
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Distro, desktop session (Wayland/X11), Plasma/app version.
+      placeholder: "Arch Linux · KDE Plasma 6 (Wayland) · Kitty 0.x"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Screenshots or Logs
+      description: Paste terminal output or drag-and-drop screenshots here.
+      render: shell
+    validations:
+      required: false
