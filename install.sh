@@ -86,6 +86,14 @@ run_cmd() {
     fi
 }
 
+try_cmd() {
+    local bin="$1"
+    shift
+    if command -v "$bin" >/dev/null 2>&1; then
+        "$bin" "$@" >/dev/null 2>&1 || true
+    fi
+}
+
 should_run() {
     local comp="$1"
     if [ -n "$ONLY_LIST" ]; then
@@ -274,8 +282,8 @@ if should_run "plasma"; then
     run_cmd cp -rf "$DIR/plasma/kvantum/Aether" "$HOME/.config/Kvantum/"
 
     if ! $DRY_RUN; then
-        command -v plasma-apply-colorscheme >/dev/null 2>&1 && plasma-apply-colorscheme Aether >/dev/null 2>&1 || true
-        command -v plasma-apply-desktoptheme >/dev/null 2>&1 && plasma-apply-desktoptheme Aether >/dev/null 2>&1 || true
+        try_cmd plasma-apply-colorscheme Aether
+        try_cmd plasma-apply-desktoptheme Aether
 
         WALLPAPER="$HOME/.local/share/wallpapers/Aether/contents/images/3840x2160.png"
         if [ -f "$WALLPAPER" ] && command -v plasma-apply-wallpaperimage >/dev/null 2>&1; then
@@ -310,8 +318,10 @@ if should_run "plasma"; then
             kwriteconfig6 --file "$HOME/.config/kwinrc" --group WindowSwitcher --key LayoutName "thumbnail_grid"
         fi
 
-        [ -x "/usr/lib/plasma-apply-aurorae" ] && /usr/lib/plasma-apply-aurorae "__aurorae__svg__Aether" >/dev/null 2>&1 || true
-        command -v kvantummanager >/dev/null 2>&1 && kvantummanager --set Aether >/dev/null 2>&1 || true
+        if [ -x "/usr/lib/plasma-apply-aurorae" ]; then
+            /usr/lib/plasma-apply-aurorae "__aurorae__svg__Aether" >/dev/null 2>&1 || true
+        fi
+        try_cmd kvantummanager --set Aether
     fi
 fi
 
@@ -336,8 +346,7 @@ Font=JetBrainsMono Nerd Font,10,-1,5,400,0,0,0,0,0,0,0,0,0,0,1,,0,0
 Name=Aether
 Parent=FALLBACK/
 EOF
-            command -v kwriteconfig6 >/dev/null 2>&1 && \
-                kwriteconfig6 --file "$HOME/.config/konsolerc" --group "Desktop Entry" --key DefaultProfile "Aether.profile" || true
+            try_cmd kwriteconfig6 --file "$HOME/.config/konsolerc" --group "Desktop Entry" --key DefaultProfile "Aether.profile"
         else
             log "create $HOME/.local/share/konsole/Aether.profile"
         fi
@@ -384,8 +393,8 @@ if should_run "gtk"; then
     fi
 
     if ! $DRY_RUN; then
-        command -v qdbus6 >/dev/null 2>&1 && qdbus6 org.kde.GtkConfig /GtkConfig setGtkTheme "Aether-Dark" >/dev/null 2>&1 || true
-        command -v gsettings >/dev/null 2>&1 && gsettings set org.gnome.desktop.interface gtk-theme "Aether-Dark" >/dev/null 2>&1 || true
+        try_cmd qdbus6 org.kde.GtkConfig /GtkConfig setGtkTheme "Aether-Dark"
+        try_cmd gsettings set org.gnome.desktop.interface gtk-theme "Aether-Dark"
     fi
 
     for gtk_ini in "$HOME/.config/gtk-3.0/settings.ini" "$HOME/.config/gtk-4.0/settings.ini"; do
@@ -432,7 +441,7 @@ if should_run "fonts"; then
         fi
     fi
     if ! $DRY_RUN; then
-        command -v fc-cache >/dev/null 2>&1 && fc-cache -f "$HOME/.local/share/fonts" "$HOME/.fonts" >/dev/null 2>&1 || true
+        try_cmd fc-cache -f "$HOME/.local/share/fonts" "$HOME/.fonts"
     fi
 fi
 
